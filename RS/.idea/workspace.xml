@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d0a96146-471d-4c53-aa18-31fe6f85a4ff" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/housework/lesson02/minst/mnist_tpot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/housework/mnist_cart.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,20 +13,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mnist_lr.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/mnist_sklearn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="42" />
+            <state relative-caret-position="396">
+              <caret line="33" column="71" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="71" />
+              <folding>
+                <element signature="e#45#97#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/tree/_classes.py">
+        <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/mnist_tpot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25509">
-              <caret line="803" column="8" selection-start-line="803" selection-start-column="8" selection-end-line="803" selection-end-column="8" />
+            <state relative-caret-position="297">
+              <caret line="9" column="118" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="9" selection-end-column="118" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -34,10 +40,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mnist_keras.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="891">
-              <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+            <state relative-caret-position="-652">
+              <caret line="7" column="49" lean-forward="true" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/tpot_mnist_pipeline.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="15" column="72" lean-forward="true" selection-start-line="15" selection-start-column="72" selection-end-line="15" selection-end-column="72" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,8 +64,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/keras/datasets/mnist.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
+            <state relative-caret-position="165">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/tpot/tpot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="58">
+              <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/linear_model/_logistic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="1438" column="42" selection-start-line="1438" selection-start-column="36" selection-end-line="1438" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/model_selection/_split.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="2019" column="4" selection-start-line="2019" selection-start-column="4" selection-end-line="2019" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -55,17 +100,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/utils/validation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6435">
-              <caret line="211" selection-start-line="211" selection-end-line="211" />
+            <state relative-caret-position="438">
+              <caret line="555" selection-start-line="555" selection-end-line="555" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/metrics/_classification.py">
+        <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/preprocessing/_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5544">
-              <caret line="184" selection-start-line="184" selection-end-line="184" />
+            <state relative-caret-position="168">
+              <caret line="794" selection-start-line="794" selection-end-line="794" />
             </state>
           </provider>
         </entry>
@@ -82,7 +127,16 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>min_samples_leaf</find>
+      <find>solver</find>
+      <find>slover</find>
+      <find>multi_class</find>
+      <find>generations</find>
+      <find>0.4lf%</find>
+      <find>population_size</find>
     </findStrings>
+    <replaceStrings>
+      <replace>%0.4lf</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -93,16 +147,22 @@
         <option value="$PROJECT_DIR$/mnist_lr.py" />
         <option value="$PROJECT_DIR$/mnist_keras.py" />
         <option value="$PROJECT_DIR$/housework/mnist_cart.py" />
+        <option value="$PROJECT_DIR$/housework/lesson02/mnist.py" />
+        <option value="$PROJECT_DIR$/housework/lesson02/minst/mnist_sklearn.py" />
+        <option value="$PROJECT_DIR$/housework/lesson02/minst/mnist_tpot.py" />
+        <option value="$PROJECT_DIR$/housework/lesson02/minst/tpot_mnist_pipeline.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="99" />
-    <option name="y" value="-14" />
+    <option name="x" value="-1928" />
+    <option name="y" value="-138" />
     <option name="width" value="1932" />
     <option name="height" value="1047" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <autoscrollFromSource ProjectPane="true" />
@@ -120,6 +180,119 @@
               <item name="RS" type="b2602c69:ProjectViewProjectNode" />
               <item name="RS" type="462c0819:PsiDirectoryNode" />
               <item name="housework" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RS" type="462c0819:PsiDirectoryNode" />
+              <item name="housework" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson02" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RS" type="462c0819:PsiDirectoryNode" />
+              <item name="housework" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson02" type="462c0819:PsiDirectoryNode" />
+              <item name="minst" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="py37" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="py37" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="py37" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="py37" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="py37" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+              <item name="datasets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -140,6 +313,11 @@
       </console-settings>
     </option>
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\tick\RS\housework\lesson02\minst" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -152,7 +330,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.mnist_cart">
+  <component name="RunManager" selected="Python.tpot_mnist_pipeline">
     <configuration name="Debug" type="PythonConfigurationType" factoryName="Python">
       <module name="RS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -195,27 +373,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="mnist_keras" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="RS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mnist_keras.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="mnist_lr" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="RS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -237,17 +394,84 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="mnist_sklearn" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson02/minst" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson02/minst/mnist_sklearn.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mnist_tpot" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson02/minst" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson02/minst/mnist_tpot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tpot_mnist_pipeline" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson02/minst" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson02/minst/tpot_mnist_pipeline.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.Debug" />
       <item itemvalue="Python.mnist_lr" />
-      <item itemvalue="Python.mnist_keras" />
       <item itemvalue="Python.mnist_cart" />
+      <item itemvalue="Python.mnist_sklearn" />
+      <item itemvalue="Python.mnist_tpot" />
+      <item itemvalue="Python.tpot_mnist_pipeline" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tpot_mnist_pipeline" />
+        <item itemvalue="Python.mnist_tpot" />
+        <item itemvalue="Python.mnist_sklearn" />
         <item itemvalue="Python.mnist_cart" />
         <item itemvalue="Python.mnist_lr" />
-        <item itemvalue="Python.mnist_keras" />
       </list>
     </recent_temporary>
   </component>
@@ -265,20 +489,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1928" y="-138" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12592202" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12592202" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3286334" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.3264642" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3264642" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
@@ -292,30 +516,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25509">
           <caret line="803" column="8" selection-start-line="803" selection-start-column="8" selection-end-line="803" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mnist_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/keras/datasets/mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="14" column="53" selection-start-line="14" selection-start-column="53" selection-end-line="14" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/utils/validation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6435">
-          <caret line="211" selection-start-line="211" selection-end-line="211" />
         </state>
       </provider>
     </entry>
@@ -336,10 +536,110 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/mnist.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson01.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/mnist_lr.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="99">
           <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/datasets/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-792">
+          <caret line="487" column="4" selection-start-line="487" selection-start-column="4" selection-end-line="487" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/model_selection/_split.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="2019" column="4" selection-start-line="2019" selection-start-column="4" selection-end-line="2019" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/utils/validation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="555" selection-start-line="555" selection-end-line="555" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/preprocessing/_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="794" selection-start-line="794" selection-end-line="794" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/sklearn/linear_model/_logistic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="1438" column="42" selection-start-line="1438" selection-start-column="36" selection-end-line="1438" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/tpot/tpot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/Lib/site-packages/keras/datasets/mnist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/mnist_sklearn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="33" column="71" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="71" />
+          <folding>
+            <element signature="e#45#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mnist_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-652">
+          <caret line="7" column="49" lean-forward="true" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/mnist_tpot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="9" column="118" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="9" selection-end-column="118" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson02/minst/tpot_mnist_pipeline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="15" column="72" lean-forward="true" selection-start-line="15" selection-start-column="72" selection-end-line="15" selection-end-column="72" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
