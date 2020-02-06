@@ -56,7 +56,7 @@
       <recent name="E:\tick\RS\housework\lesson02\minst" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.email_pagerank">
+  <component name="RunManager" selected="Python.sentence_textrank">
     <configuration name="Debug" type="PythonConfigurationType" factoryName="Python">
       <module name="RS" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -91,27 +91,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson04/pagerank/email_pagerank.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="logic_regression" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="RS" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson01" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson01/logic_regression.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -162,7 +141,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="pagerank_simulation1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="news_textrank_snownlp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="RS" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -170,11 +149,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson04/pagerank" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson04/textrank" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson04/pagerank/pagerank_simulation1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson04/textrank/news_textrank_snownlp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sentence_textrank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="RS" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/housework/lesson04/textrank" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/housework/lesson04/textrank/sentence_textrank.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -185,19 +185,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.Debug" />
-      <item itemvalue="Python.pagerank_simulation1" />
-      <item itemvalue="Python.networkx_pagerank" />
-      <item itemvalue="Python.logic_regression" />
       <item itemvalue="Python.email_pagerank" />
       <item itemvalue="Python.mnist_sklearn" />
+      <item itemvalue="Python.networkx_pagerank" />
+      <item itemvalue="Python.sentence_textrank" />
+      <item itemvalue="Python.news_textrank_snownlp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.sentence_textrank" />
+        <item itemvalue="Python.news_textrank_snownlp" />
         <item itemvalue="Python.email_pagerank" />
         <item itemvalue="Python.networkx_pagerank" />
         <item itemvalue="Python.mnist_sklearn" />
-        <item itemvalue="Python.logic_regression" />
-        <item itemvalue="Python.pagerank_simulation1" />
       </list>
     </recent_temporary>
   </component>
@@ -215,54 +215,58 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state width="759" height="466" key="DebuggerActiveHint" timestamp="1580974086367">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="759" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1580974086367" />
     <state x="1413" y="226" key="FileChooserDialogImpl" timestamp="1580618139203">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1413" y="226" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1580618139203" />
-    <state width="1882" height="282" key="GridCell.Tab.0.bottom" timestamp="1580831818086">
+    <state width="1882" height="284" key="GridCell.Tab.0.bottom" timestamp="1580974594005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580831818086" />
-    <state width="1882" height="282" key="GridCell.Tab.0.center" timestamp="1580831818086">
+    <state width="1882" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580974594005" />
+    <state width="1882" height="284" key="GridCell.Tab.0.center" timestamp="1580974594005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580831818086" />
-    <state width="1882" height="282" key="GridCell.Tab.0.left" timestamp="1580831818086">
+    <state width="1882" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580974594005" />
+    <state width="1882" height="284" key="GridCell.Tab.0.left" timestamp="1580974594005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580831818086" />
-    <state width="1882" height="282" key="GridCell.Tab.0.right" timestamp="1580831818086">
+    <state width="1882" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580974594005" />
+    <state width="1882" height="284" key="GridCell.Tab.0.right" timestamp="1580974594005">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1882" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580831818086" />
-    <state width="938" height="350" key="GridCell.Tab.1.bottom" timestamp="1580831559747">
+    <state width="1882" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580974594005" />
+    <state width="1882" height="343" key="GridCell.Tab.1.bottom" timestamp="1580974167458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="350" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580831559747" />
-    <state width="938" height="350" key="GridCell.Tab.1.center" timestamp="1580831559746">
+    <state width="1882" height="343" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580974167458" />
+    <state width="1882" height="343" key="GridCell.Tab.1.center" timestamp="1580974167458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="350" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580831559746" />
-    <state width="938" height="350" key="GridCell.Tab.1.left" timestamp="1580831559746">
+    <state width="1882" height="343" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580974167458" />
+    <state width="1882" height="343" key="GridCell.Tab.1.left" timestamp="1580974167458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="350" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580831559746" />
-    <state width="938" height="350" key="GridCell.Tab.1.right" timestamp="1580831559747">
+    <state width="1882" height="343" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580974167458" />
+    <state width="1882" height="343" key="GridCell.Tab.1.right" timestamp="1580974167458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="350" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580831559747" />
+    <state width="1882" height="343" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580974167458" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1580618165216">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1580618165216" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1580777383154">
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1580970504265">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580777383154" />
-    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1580827278372">
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580970504265" />
+    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1580970551781">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1580827278372" />
+    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1580970551781" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -276,6 +280,11 @@
           <url>file://$PROJECT_DIR$/housework/lesson04/pagerank/networkx_pagerank.py</url>
           <line>19</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/housework/lesson04/textrank/sentence_textrank.py</url>
+          <line>9</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
