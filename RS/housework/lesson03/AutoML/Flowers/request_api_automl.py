@@ -8,3 +8,4 @@ headers={'user-agent':"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML
 files = {'file':open('./test/image_0800.jpg','rb')}
 result=requests.post(url,headers=headers, files=files)
 print (result.text)
+

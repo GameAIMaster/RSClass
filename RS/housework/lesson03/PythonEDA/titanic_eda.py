@@ -1,132 +1,82 @@
-
-import matplotlib.pyplot as plt
-import seaborn as sns
 import numpy as np
 import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.feature_extraction import DictVectorizer
+from sklearn.model_selection import cross_val_score
+from sklearn import metrics
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 数据加载
+train_data = pd.read_csv("train.csv")
+test_data = pd.read_csv("test.csv")
+# 使用平均年龄来填充年龄中的nan值
+train_data['Age'].fillna(train_data['Age'].mean(), inplace=True)
+test_data['Age'].fillna(test_data['Age'].mean(), inplace=True)
+# 使用票价的均值填充票价中的nan值
+train_data['Fare'].fillna(train_data['Fare'].mean(), inplace=True)
+test_data['Fare'].fillna(test_data['Fare'].mean(), inplace=True)
+# 使用登录最多的港口来填充登录港口的nan值
+train_data['Embarked'].fillna('S', inplace=True)
+test_data['Embarked'].fillna('S', inplace=True)
+# 特征选择
+features = ['Pclass', 'Sex', 'Age', 'SibSp', 'Parch', 'Fare', 'Embarked']
+train_feature = train_data[features]
+
+# 显示特征之间的相关系数
+plt.figure(figsize=(10, 10))
+plt.title('Pearson Correlation between Features', y=1.05, size=15)
+train_feature_hot_encode = train_feature.drop('Sex', 1).join(train_feature.Sex.str.get_dummies())
+train_feature_hot_encode = train_feature_hot_encode.drop('Embarked', 1).join(train_feature.Embarked.str.get_dummies())
+# # 计算特征之间的Pearson系数，即相似度
+# sns.heatmap(train_feature_hot_encode.corr(), linewidths=0.1, vmax=1.0, fmt='.2f', square=True, linecolor='white', annot=True)
+# plt.show()
+
+# 使用饼图来进行Survived取值的可视化
+# print(type(train_data["Survived"].value_counts()))
+# train_data['Survived'].value_counts().plot(kind='pie', label='Survived')
+# plt.show()
+
+# 不同的Pclass,幸存人数(条形图)
+# sns.barplot(x = 'Pclass', y = "Survived", data = train_data);
+# plt.show()
+
+# 不同的Embarked,幸存人数(条形图)
+# sns.barplot(x = 'Embarked', y = "Survived", data = train_data);
+# plt.show()
+
+# 训练并显示特征向量的重要程度
+def train(train_features, train_labels):
+    # 构造CART决策树
+    clf = DecisionTreeClassifier()
+    # 决策树训练
+    clf.fit(train_features, train_labels)
+    # 显示特征向量的重要程度
+    coeffs = clf.feature_importances_
+    print(coeffs)
+    df_co = pd.DataFrame(coeffs, columns=['importance'])
+    # 下标设置为Feature Name
+    df_co.index = train_features.columns
+    df_co.sort_values('importance', ascending=True, inplace=True)
+    df_co.importance.plot(kind='barh')
+
+    plt.title('Survived Importance')
+    plt.show()
+    return clf
+
+clf = train(train_feature_hot_encode,  train_data["Survived"])
+
+# 决策树可视化
+import pydotplus
+from six import StringIO
+from sklearn.tree import export_graphviz
 import os
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'  #注意修改你的路径
 
-from matplotlib.font_manager import FontProperties
-# 散点图
-def scatter():
-	# 数据准备
-	N = 500
-	x = np.random.randn(N)
-	y = np.random.randn(N)
-	# 用Matplotlib画散点图
-	plt.scatter(x,y,marker='o')
-	plt.show()
-	# 用Seaborn画散点图
-	df = pd.DataFrame({'x': x, 'y': y})
-	sns.jointplot( x='x', y='y', data=df, kind='scatter')
-	plt.show()
+def show_tree(clf):
+	dot_data = StringIO()
+	export_graphviz(clf, out_file=dot_data)
+	graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
+	graph.write_pdf("titanic_tree.pdf")
 
 
-def line_cart():
-	# 数据准备
-	x = [1900, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910]
-	y = [265, 323, 136, 220, 305, 350, 419, 450, 560, 720, 830]
-	# 用Matplotlib画折线图
-	plt.plot(x, y)
-	plt.show()
-	# 用Seaborn画散点图
-	df = pd.DataFrame({'x': x, 'y': y})
-	sns.lineplot(x, y)
-	plt.show()
-
-# 条形图
-def bar_chart():
-	# 数据准备
-	x = ['c1', 'c2', 'c3', 'c4']
-	y = [15, 18, 5, 26]
-	# 用Matplotlib画条形图
-	plt.bar(x, y)
-	plt.show()
-	# 用Seaborn画条形图
-	sns.barplot(x, y)
-	plt.show()
-
-
-# 箱线图
-def box_plots():
-	# 数据准备
-	# 生成0-1之间的20*4维度数据
-	data = np.random.normal(loc=0.5, scale=0.15,size=(10, 4))
-	print(data)
-	lables = ['A', 'B', 'C', 'D']
-	# 用Matplotlib画箱线图
-	plt.boxplot(data, lables)
-	plt.show()
-	# 用Seaborn画箱线图
-	df = pd.DataFrame(data=data, columns=lables)
-	sns.boxplot(data=df)
-	plt.show()
-
-
-def pie_chart():
-	# 数据准备
-	nums= [25, 44, 27]
-	# labels：程序员，策划,美术，
-	labels = ['Programmer', 'Planner', 'Artist']
-	# 用Matplotlib画饼图
-	plt.pie(nums, labels=labels)
-	plt.show()
-
-# 饼图
-def pie_chart2():
-	# 数据准备
-	data = {}
-	data['Programmer'] = 25
-	data['Planner'] = 33
-	data['Artist'] = 37
-	data = pd.Series(data)
-	data.plot(kind = "pie", label='heros')
-	plt.show()
-
-
-#热力图
-def heatmap_chart():
-	# 数据准备
-	np.random.seed(3)
-	data = np.random.rand(3, 3)
-	print(data)
-	heatmap = sns.heatmap(data)
-	plt.show()
-
-
-#蜘蛛图
-def spider_chart():
-	#数据准备
-	labels = np.array([u'数学', u'语文', u'英语', u'化学', u'生物'])
-	values = [85, 70, 40, 78, 60]
-	# 画图数据准备，角度、状态值
-	angles = np.linspace(0, 2*np.pi, len(values), endpoint=False)
-	stats = np.concatenate((values,[values[0]]))
-	print(stats)
-	angles = np.concatenate((angles, [angles[0]]))
-	# 用Matplotlib画蜘蛛图
-	fig = plt.figure()
-	ax = fig.add_subplot(111, polar=True)
-	ax.plot(angles, stats, 'o-', linewidth=2)
-	ax.fill(angles, stats, alpha=0.2)
-	#设置中文字体
-	font = FontProperties(fname='C:\Windows\Fonts\simhei.ttf', size=14)
-	ax.set_thetagrids(angles * 180/np.pi, labels, FontProperties=font)
-	plt.show()
-
-
-# 成对关系图
-def pairplot():
-	# 数据准备
-	flights = sns.load_dataset('flights')
-	# 用Seaborn画成对关系
-	sns.pairplot(flights)
-	plt.show()
-# 用Seaborn画箱线图
-# scatter()
-# line_cart()
-# bar_chart()
-# box_plots()
-# pie_chart2()
-# heatmap_chart()
-# spider_chart()
-pairplot()
