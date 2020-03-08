@@ -41,5 +41,6 @@ data = pd.read_csv('./movies.csv')
 title = " ".join(data['title'])
 genres = " ".join(data['genres'])
 all_word = title + genres
+print(title)
 # 生成词云
-create_word_cloud(all_word)
+#create_word_cloud(all_word)
