@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/titanic_eda.py" line="124" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="d0a96146-471d-4c53-aa18-31fe6f85a4ff" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/housework/lesson03/AutoML/Flowers/request_api_automl.py" afterDir="false" />
@@ -17,36 +14,49 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/python_eda.py">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/train.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="12" column="67" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="67" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/titanic_eda.py">
+        <entry file="file://$PROJECT_DIR$/housework/lesson05/MovieLens/ALS.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="131" column="10" lean-forward="true" selection-start-line="131" selection-start-column="10" selection-end-line="131" selection-end-column="10" />
+            <state relative-caret-position="251">
+              <caret line="115" column="43" lean-forward="true" selection-start-line="115" selection-start-column="43" selection-end-line="115" selection-end-column="43" />
               <folding>
-                <element signature="e#1#32#0" expanded="true" />
+                <element signature="e#14#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/figure.py">
+        <entry file="file://$PROJECT_DIR$/housework/lesson01/departure_prediction/departure_pre.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-207">
-              <caret line="1261" column="8" selection-start-line="1261" selection-start-column="8" selection-end-line="1261" selection-end-column="8" />
+            <state relative-caret-position="298">
+              <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/seaborn/categorical.py">
+        <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/scipy/sparse/dok.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="2233" column="4" selection-start-line="2233" selection-start-column="4" selection-end-line="2233" selection-end-column="4" />
+            <state relative-caret-position="298">
+              <caret line="129" column="39" lean-forward="true" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/scipy/sparse/base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="371">
+              <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -54,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/128788151/numpy/random/mtrand.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
+            <state relative-caret-position="47385">
               <caret line="1759" column="10" selection-start-line="1759" selection-start-column="4" selection-end-line="1759" selection-end-column="10" />
             </state>
           </provider>
@@ -63,15 +73,6 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/pyplot.py">
           <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36018">
-              <caret line="1334" column="76" selection-start-line="1334" selection-start-column="70" selection-end-line="1334" selection-end-column="76" />
-            </state>
-          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -136,6 +137,7 @@
       <find>xlabel</find>
       <find>display</find>
       <find>best_inertia</find>
+      <find>shape</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,16 +153,17 @@
         <option value="$PROJECT_DIR$/housework/lesson03/AutoML/Flowers/request_api_automl.py" />
         <option value="$PROJECT_DIR$/housework/lesson03/team_cluster/team_cluster.py" />
         <option value="$PROJECT_DIR$/housework/lesson03/MovieLens/movie_apriori.py" />
-        <option value="$PROJECT_DIR$/housework/lesson03/PythonEDA/python_eda.py" />
         <option value="$PROJECT_DIR$/housework/lesson03/PythonEDA/titanic_eda.py" />
+        <option value="$PROJECT_DIR$/housework/lesson03/PythonEDA/python_eda.py" />
+        <option value="$PROJECT_DIR$/housework/lesson05/MovieLens/ALS.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-1831" />
-    <option name="y" value="16" />
-    <option name="width" value="1932" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1902" />
+    <option name="y" value="-103" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectId" id="1XEiW1W0SCrFh4n6DibiQB8LPLb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -173,7 +176,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -190,193 +192,23 @@
               <item name="RS" type="b2602c69:ProjectViewProjectNode" />
               <item name="RS" type="462c0819:PsiDirectoryNode" />
               <item name="housework" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson01" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RS" type="462c0819:PsiDirectoryNode" />
-              <item name="housework" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson01" type="462c0819:PsiDirectoryNode" />
-              <item name="departure_prediction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RS" type="462c0819:PsiDirectoryNode" />
-              <item name="housework" type="462c0819:PsiDirectoryNode" />
               <item name="lesson02" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RS" type="b2602c69:ProjectViewProjectNode" />
               <item name="RS" type="462c0819:PsiDirectoryNode" />
               <item name="housework" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson03" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RS" type="462c0819:PsiDirectoryNode" />
-              <item name="housework" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson03" type="462c0819:PsiDirectoryNode" />
-              <item name="PythonEDA" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RS" type="462c0819:PsiDirectoryNode" />
-              <item name="housework" type="462c0819:PsiDirectoryNode" />
-              <item name="lesson03" type="462c0819:PsiDirectoryNode" />
-              <item name="team_cluster" type="462c0819:PsiDirectoryNode" />
+              <item name="lesson05" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RS" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="py37" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="py37" type="462c0819:PsiDirectoryNode" />
-              <item name="DLLs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="DLLs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="logging" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="lxml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="pandas" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="pandas" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="requests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="setuptools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="urllib3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="urllib3" type="462c0819:PsiDirectoryNode" />
-              <item name="contrib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="urllib3" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="lxml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="urllib3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="Typeshed Stubs" type="9c07c3ae:PyTypeShedNode" />
-            </path>
-            <path>
-              <item name="RS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (RS) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="Typeshed Stubs" type="9c07c3ae:PyTypeShedNode" />
-              <item name="2and3" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -586,15 +418,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-138" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-1902" y="-103" width="1936" height="1056" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3253796" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3253796" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40130153" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -778,13 +609,6 @@
     </entry>
     <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/lxml/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/housework/lesson01/departure_prediction/departure_pre.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-418">
-          <caret line="64" column="64" selection-start-line="64" selection-start-column="57" selection-end-line="64" selection-end-column="64" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/housework/lesson03/BreadBasket/apriori_breadbasket.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1027,6 +851,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/python_eda.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3105">
+          <caret line="121" column="25" selection-start-line="121" selection-start-column="25" selection-end-line="121" selection-end-column="25" />
+          <folding>
+            <element signature="e#1#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/titanic_eda.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/figure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33291">
+          <caret line="1261" column="8" selection-start-line="1261" selection-start-column="8" selection-end-line="1261" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/seaborn/categorical.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59859">
+          <caret line="2233" column="4" selection-start-line="2233" selection-start-column="4" selection-end-line="2233" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/128788151/numpy/random/mtrand.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47385">
+          <caret line="1759" column="10" selection-start-line="1759" selection-start-column="4" selection-end-line="1759" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/sklearn/cluster/_kmeans.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25920">
@@ -1048,39 +909,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/128788151/numpy/random/mtrand.py">
+    <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/train.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="1759" column="10" selection-start-line="1759" selection-start-column="4" selection-end-line="1759" selection-end-column="10" />
+        <state relative-caret-position="243">
+          <caret line="12" column="67" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/python_eda.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/seaborn/categorical.py">
+    <entry file="file://$PROJECT_DIR$/housework/lesson01/departure_prediction/departure_pre.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="2233" column="4" selection-start-line="2233" selection-start-column="4" selection-end-line="2233" selection-end-column="4" />
+        <state relative-caret-position="298">
+          <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/matplotlib/figure.py">
+    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/scipy/sparse/dok.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-207">
-          <caret line="1261" column="8" selection-start-line="1261" selection-start-column="8" selection-end-line="1261" selection-end-column="8" />
+        <state relative-caret-position="298">
+          <caret line="129" column="39" lean-forward="true" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/housework/lesson03/PythonEDA/titanic_eda.py">
+    <entry file="file://E:/Programs/Anaconda/envs/py37/lib/site-packages/scipy/sparse/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="131" column="10" lean-forward="true" selection-start-line="131" selection-start-column="10" selection-end-line="131" selection-end-column="10" />
+        <state relative-caret-position="371">
+          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/housework/lesson05/MovieLens/ALS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="115" column="43" lean-forward="true" selection-start-line="115" selection-start-column="43" selection-end-line="115" selection-end-column="43" />
           <folding>
-            <element signature="e#1#32#0" expanded="true" />
+            <element signature="e#14#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
