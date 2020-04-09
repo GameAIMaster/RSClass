@@ -28,3 +28,45 @@ def valid(f):
 #     print(''.join(digits))
 
 # print(re.findall('[A-Z]', '0Z34'))
+
+# 通过trace发现eval执行了太多的时间，执行太多不必要的工作
+# 通过将计算制作成lamuda表达式
+
+# f = lambda A,B,C:A+B+C
+# print(f(1,2,3))
+
+def compile_word(word):
+    # E.g compile word 'YOU' return '(1*U + 10*O + 100*Y)
+    # if '+' return '+'
+    if word.isupper():
+        # result = '+'.join(['1'+'0'*i+'*'+v for i, v in enumerate(word[::-1])])
+        result = '+'.join(['%s*%s' % (10**i, v) for i, v in enumerate(word[::-1])])
+        print (result)
+        return '('+ result + ')'
+    else:
+        return word
+
+# print(compile_word("YOU"))
+
+# 改进
+def fast_solve(formula):
+    f,letters = compile_formula(formula)
+    for digits in itertools.permutations([1,2,3,4,5,6,7,8,9,0], len(letters)):
+        if f(*digits) is True:
+            table = str.maketrans(letters, ''.join(map(str, digits))) # 数字映射成字符串
+            return formula.translate(table)
+        else:
+            pass
+
+
+def compile_formula(formula, verbose=False):
+    letters = ''.join(set(re.findall('[A-Z]', formula)))
+    params = ','.join(letters)
+    tokens = map(compile_word, re.split('([A-Z]+)', formula)) #正则加（）是保留分割项
+    body = ''.join(tokens)
+    lm = 'lambda ' + params +':' + body
+    print(body)
+    return eval(lm),letters
+
+print(fast_solve("ODD+ODD==EVEN"))
+# print(re.split('([A-Z]+)', "ODD+ODD=EVEN",))
