@@ -60,13 +60,18 @@ def fast_solve(formula):
 
 
 def compile_formula(formula, verbose=False):
+
     letters = ''.join(set(re.findall('[A-Z]', formula)))
+    first_letters = set(re.findall(r'\b([A-Z])[A-Z]',formula))
     params = ','.join(letters)
     tokens = map(compile_word, re.split('([A-Z]+)', formula)) #正则加（）是保留分割项
-    body = ''.join(tokens)
+    if first_letters:
+        tests = ' and '.join([L+" != 0" for L in first_letters])
+        body = '%s and (%s)' % (''.join(tokens),tests )
     lm = 'lambda ' + params +':' + body
-    print(body)
-    return eval(lm),letters
+    print(lm)
+    return eval(lm), letters
 
-print(fast_solve("ODD+ODD==EVEN"))
+print(fast_solve("A + B == BA"))
+print(re.findall(r'\b([A-Z])[A-Z]',"AB + B == BA"))
 # print(re.split('([A-Z]+)', "ODD+ODD=EVEN",))
