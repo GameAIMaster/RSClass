@@ -65,8 +65,9 @@ def compile_formula(formula, verbose=False):
     tokens = map(compile_word, re.split('([A-Z]+)', formula)) #正则加（）是保留分割项
     body = ''.join(tokens)
     lm = 'lambda ' + params +':' + body
-    print(body)
-    return eval(lm),letters
+    if verbose:print(lm)
+    else:
+        return eval(lm),letters
 
 print(fast_solve("ODD+ODD==EVEN"))
 # print(re.split('([A-Z]+)', "ODD+ODD=EVEN",))
