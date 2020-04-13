@@ -91,5 +91,28 @@ def instrument_fn(fn, *args):
     print('%s got %s with %5d iters over %7d items'% (fn.__name__, result, c.starts, c.items))
 
 
+def adjacent(h1, h2):
+    return abs(h1 - h2) == 1
 
-instrument_fn(zebra_puzzle)
+
+def higher(h1, h2):
+    return h1 - h2 >= 1
+
+
+def floor_puzzle():
+    # Your code here
+    floors = bottom, _, middle, _, top = [1, 2, 3, 4, 5]
+    orderings = list(itertools.permutations(floors))  # 1
+
+    for Hopper, Kay, Liskov, Perlis, Ritchie in orderings:
+        if (Hopper is not top and
+            Kay is not bottom and
+            Liskov < top and Liskov > bottom and
+            higher(Perlis, Kay) and
+            not adjacent(Ritchie, Liskov) and
+            not adjacent(Liskov, Kay) ):
+            return[Hopper, Kay, Liskov, Perlis, Ritchie]
+
+
+# instrument_fn(floor_puzzle)
+print(floor_puzzle())
