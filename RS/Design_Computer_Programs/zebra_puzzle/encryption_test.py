@@ -72,6 +72,6 @@ def compile_formula(formula, verbose=False):
     print(lm)
     return eval(lm), letters
 
-print(fast_solve("A + B == BA"))
+print(fast_solve("ODD+ODD==EVEN"))
 print(re.findall(r'\b([A-Z])[A-Z]',"AB + B == BA"))
-# print(re.split('([A-Z]+)', "ODD+ODD=EVEN",))
+# print(re.split('([A-Z]+)', "ODD+ODD==EVEN",))
