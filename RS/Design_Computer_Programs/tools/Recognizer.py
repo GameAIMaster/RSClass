@@ -32,6 +32,9 @@ null = frozenset([])
 
 def test():
     assert match(star(lit('a')), 'aaaaabbbaa') == 'aaaaa'
+    assert match(seq(lit('a'),lit('b')), 'aaaaabbbaa') == None
+    print(match(seq(lit('a'),lit('b')), 'abbbaa'))
+    assert match(seq(lit('a'),lit('b')), 'abbbaa') == 'ab'
     assert match(lit('hello'), 'hello how are you?') == 'hello'
     assert match(lit('x'), 'hello how are you?') == None
     assert match(oneof('xyz'), 'x**2 + y**2 = r**2') == 'x'

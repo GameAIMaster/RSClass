@@ -65,7 +65,7 @@ def test():
     return print('test passes')
 
 
-# concepts: patterm, text->result,  partial result,control iteration,set or remind(消耗集合)
+# concepts: pattern, text->result,  partial result,control iteration,set or remind(消耗集合)
 # 提供API创造自己的语言
 #---------------
 # User Instructions
@@ -143,7 +143,7 @@ def matchset(pattern, text):
 
 null = frozenset()
 
-
+#
 def components(pattern):
     "Return the op, x, and y arguments; x and y are None if missing."
     x = pattern[1] if len(pattern) > 1 else None
@@ -153,8 +153,7 @@ def components(pattern):
 
 def test2():
     assert matchset(('lit', 'abc'), 'abcdef') == set(['def'])
-    assert matchset(('seq', ('lit', 'hi '),
-                     ('lit', 'there ')),
+    assert matchset(seq('hi', 'there'),
                     'hi there nice to meet you') == set(['nice to meet you'])
     assert matchset(('alt', ('lit', 'dog'),
                      ('lit', 'cat')), 'dog and cat') == set([' and cat'])
