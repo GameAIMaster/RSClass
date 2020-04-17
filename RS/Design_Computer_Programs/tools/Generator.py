@@ -48,6 +48,16 @@ def genseq(x, y, Ns, startx=0):
                for m2 in ymatches
                if len(m1 + m2) in Ns)
 
+def n_ary(f):
+    """Given binary function f(x, y), return an n_ary function such
+    that f(x, y, z) = f(x, f(y,z)), etc. Also allow f(x) = x."""
+    def n_ary_f(x, *args):
+        if len(args) == 0:
+            return x
+        else:
+            return f(x,(n_ary_f(*args)))
+    return n_ary_f
+
 def test():
     f = lit('hello')
     assert f(set([1, 2, 3, 4, 5])) == set(['hello'])
@@ -62,7 +72,6 @@ def test():
     h = oneof('theseletters')
     assert h(set([1, 2, 3])) == set(['t', 'h', 'e', 's', 'l', 'r'])
     assert h(set([2, 3, 4])) == null
-
     return 'tests pass'
 
 
@@ -71,7 +80,9 @@ print(test())
 def text_gen():
     def N(hi): return set(range(hi+1))
     a,b,c,d = map(lit, 'abcd')
-    print(a(N(2)))
+    g = n_ary(seq)
+    print(seq(lit('a'),seq(lit('b'),lit('c')))(N(3)))
+    print(g(lit('a'),lit('b'),lit('c'))(N(3)))
     # print(star(oneof('王东梁'))(N(2)))
     assert star(oneof('ab'))(N(2)) == set(['', 'a', 'aa', 'ab', 'ba', 'bb', 'b'])
     return 'test pass'
