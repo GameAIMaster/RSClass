@@ -13,6 +13,28 @@ def memo(f):
             return result
         except TypeError:
             # some element of args can't be a dict key
-            return f(args)
+            return f(*args)
+    return _f
 
-print(seq('a','b','c'))
+# 调用计数
+@decorator
+def countcalls(f):
+    """ Decorator that makes the function count calls to it, in callcounts[f]."""
+    def _f(*args):
+        callcounts[_f] += 1
+        return f(*args)
+    callcounts[_f] = 0
+    return _f
+
+callcounts = {}
+
+@countcalls
+@memo
+def fib(n): return 1 if n<=1 else fib(n-1) + fib(n-2)
+
+print("n     fib(n)     calls     callratio")
+# old = 1
+for i in range(22):
+    callcounts[fib] = 0
+    print("%d     %d     %d     %f" % (i, fib(i), callcounts[fib], fib(i)/fib(i - 1)))
+
