@@ -1,5 +1,5 @@
 from functools import update_wrapper
-#重构方法 使接受两个参数的方法能接受多个参数
+#重构方法 使接受两个参数的方法能接受多个参数 表达工具
 
 def decorator(d):
     "Make function d a decorator: d weaps a function fn."
@@ -23,4 +23,7 @@ def n_ary(f):
 def seq(x,y): return ('seq', x, y)
 
 print(seq('a','b','c'))
+
+
+
 
