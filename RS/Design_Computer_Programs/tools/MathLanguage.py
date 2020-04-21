@@ -1,4 +1,5 @@
 import re
+from Design_Computer_Programs.tools.Memoization import *
 """
 语法：Grammar
 Exp     => Term[+-] Exp | Term
@@ -61,6 +62,7 @@ def parse(start_symbol, text, grammar):
             if text is None: return Fail
             result.append(tree)
         return result, text
+    @memo #提高性能，防止匹配不成功重新匹配
     def parse_atom(atom, text):
         if atom in grammar: # Non-Terminal: tuple of alternatives
             for alternative in grammar[atom]:
