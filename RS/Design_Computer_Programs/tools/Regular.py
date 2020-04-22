@@ -153,7 +153,7 @@ def components(pattern):
 
 def test2():
     assert matchset(('lit', 'abc'), 'abcdef') == set(['def'])
-    assert matchset(seq('hi', 'there'),
+    assert matchset(('seq', ('lit', 'hi '), ('lit', 'there ')),
                     'hi there nice to meet you') == set(['nice to meet you'])
     assert matchset(('alt', ('lit', 'dog'),
                      ('lit', 'cat')), 'dog and cat') == set([' and cat'])
@@ -198,4 +198,4 @@ def test3():
     assert search(('alt', ('lit', 'b'), ('lit', 'c')), 'ab') == 'b'
     return 'tests pass'
 
-print(test3())
+# print(test3())

@@ -111,7 +111,6 @@ def parse(start_symbol, text, grammar):
         return result, text
 
     @memo
-    @trace
     def parse_atom(atom, text):
         if atom in grammar:  # Non-Terminal: tuple of alternatives
             for alternative in grammar[atom]:
@@ -192,5 +191,6 @@ def Valid(G):
     show('Terminals', rhtokens - lhtokens)
     show('Suspects', [t for t in (rhtokens - lhtokens) if t.isalnum()])
     show('Orphans ', lhtokens - rhtokens)
-# print (test())
-Valid(JSON)
+
+print (test())
+# Valid(JSON)
