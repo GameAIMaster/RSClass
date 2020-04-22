@@ -69,7 +69,7 @@ def fib(n): return 1 if n <= 1 else fib(n-1) + fib(n-2)
 
 
 
-fib(6) #running this in the browser's IDE  will not display the indentations!
+# fib(6) #running this in the browser's IDE  will not display the indentations!
 
 
 
