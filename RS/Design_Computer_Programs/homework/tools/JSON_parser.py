@@ -19,6 +19,7 @@ from functools import update_wrapper
 import re
 
 
+
 def grammar(description, whitespace=r'\s*'):
     """Convert a description to a grammar.  Each line is a rule for a
     non-terminal symbol; it looks like this:
