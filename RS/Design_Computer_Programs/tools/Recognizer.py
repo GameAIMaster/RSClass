@@ -40,5 +40,3 @@ def test():
     assert match(oneof('xyz'), 'x**2 + y**2 = r**2') == 'x'
     assert match(oneof('xyz'), '   x is here!') == None
     return 'tests pass'
-
-print(test())

@@ -78,7 +78,7 @@ def parse(start_symbol, text, grammar):
     return parse_atom(start_symbol, text)
 Fail = (None, None)
 
-print(parse('Exp', 'wq * x + 3', G))
+# print(parse('Exp', 'wq * x + 3', G))
 
 
 

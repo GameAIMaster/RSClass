@@ -12,7 +12,9 @@ import re
 def findtags(text):
     parms = '(\w+\s*=\s*"[^"]*"\s*)*'
     tags = '(<\s*\w+\s*' + parms + '\s*/?>)'
+    findtag = '(<\s*\w+\s*(\w+\s*=\s*"[^"]*"\s*)*\s*/?>)'
     return [a for a,b in re.findall(tags, text)]
+    # return re.findall(findtag, text)
     # return re.findall('(\w+)*', 'abc')
 
 testtext1 = """
