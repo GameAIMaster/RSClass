@@ -1,4 +1,5 @@
 from Design_Computer_Programs.tools.Refactoring import *
+import time
 # 缓存技术 if n in cache return cache[n] 性能工具
 @decorator
 def memo(f):
@@ -29,6 +30,24 @@ def countcalls(f):
 callcounts = {}
 
 
+# 调用计时 调试工具
+@decorator
+def timecalls(f):
+    """ Decorator that makes the function count calls to it, in timecounts[f]."""
+    def _f(*args):
+
+        # endtime = time.time()
+        starttime = time.time()
+        result = f(*args)
+        timefun[_f] = time.time() - starttime
+        return result
+    timefun[_f] = 0
+
+    return _f
+
+timefun = {}
+
+
 #trace 调试工具
 @decorator
 def trace(f):
@@ -54,8 +73,10 @@ trace=disable
 # @countcalls
 # @memo
 
-@trace
 def fib(n): return 1 if n <= 1 else fib(n-1) + fib(n-2)
+
+@timecalls
+def fortest(): return [ a for a in range(1000) for b in range(100000)]
 
 # 测试调用计数
 # print("n     fib(n)     calls     callratio")
@@ -69,8 +90,8 @@ def fib(n): return 1 if n <= 1 else fib(n-1) + fib(n-2)
 
 
 
-# fib(6) #running this in the browser's IDE  will not display the indentations!
-
+fortest() #running this in the browser's IDE  will not display the indentations!
+# print('计算用时：%s' % (timefun[fortest]))
 
 
 

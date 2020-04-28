@@ -1,4 +1,5 @@
 import doctest
+from Design_Computer_Programs.tools.Memoization import *
 # -----------------
 # User Instructions
 #
@@ -119,7 +120,7 @@ print(test1())
 
 def elapsed_time(path):
     return path[-1][2]
-
+@timecalls
 def bridge_problem(here):
     """Modify this to test for goal later: after pulling a state off frontier,
     not when we are about to put it on the frontier."""
@@ -154,40 +155,38 @@ def test2():
 
 print(test2())
 
-class TestBridge: """
->>> elapsed_time(bridge_problem([1,2,5,10]))
-17
-
-## There are two equally good solutions
->>> S1 = [(2, 1, '->'), (1, 1, '<-'), (5, 10, '->'), (2, 2, '<-'), (2, 1, '->')]
->>> S2 = [(2, 1, '->'), (2, 2, '<-'), (5, 10, '->'), (1, 1, '<-'), (2, 1, '->')]
->>> path_actions(bridge_problem([1,2,5,10])) in (S1, S2)
-True
-
-## Try some other problems
->>> path_actions(bridge_problem([1,2,5,10,15,20]))
-[(2, 1, '->'), (1, 1, '<-'), (10, 5, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (15, 20, '->'), (2, 2, '<-'), (2, 1, '->')]
-
->>> path_actions(bridge_problem([1,2,4,8,16,32]))
-[(2, 1, '->'), (1, 1, '<-'), (8, 4, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (16, 32, '->'), (2, 2, '<-'), (2, 1, '->')]
-
->>> path_actions(bridge_problem([1,2,4,8,16]))
-[(2, 1, '->'), (1, 1, '<-'), (8, 16, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (4, 1, '->')]
-
->>> [elapsed_time(bridge_problem([1,2,4,8,16][:N])) for N in range(6)]
-[0, 1, 2, 7, 15, 28]
-
->>> path_actions(bridge_problem([1,1,2,3,5,8,13,21]))
-[(2, 1, '->'), (1, 1, '<-'), (8, 5, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (13, 21, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (3, 1, '->')]
-
->>> [elapsed_time(bridge_problem([1,1,2,3,5,8,13,21][:N])) for N in range(8)]
-[0, 1, 1, 2, 6, 12, 19, 30]
-
->>> path_actions(bridge_problem([]))
-[]
-
-
-"""
+# class TestBridge: """
+# >>> elapsed_time(bridge_problem2([1,2,5,10]))
+# 17
+#
+# ## There are two equally good solutions
+# >>> S1 = [(2, 1, '->'), (1, 1, '<-'), (5, 10, '->'), (2, 2, '<-'), (2, 1, '->')]
+# >>> S2 = [(2, 1, '->'), (2, 2, '<-'), (5, 10, '->'), (1, 1, '<-'), (2, 1, '->')]
+# >>> path_actions(bridge_problem([1,2,5,10])) in (S1, S2)
+# True
+#
+# ## Try some other problems
+# >>> path_actions(bridge_problem([1,2,5,10,15,20]))
+# [(2, 1, '->'), (1, 1, '<-'), (10, 5, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (15, 20, '->'), (2, 2, '<-'), (2, 1, '->')]
+#
+# >>> path_actions(bridge_problem([1,2,4,8,16,32]))
+# [(2, 1, '->'), (1, 1, '<-'), (8, 4, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (16, 32, '->'), (2, 2, '<-'), (2, 1, '->')]
+#
+# >>> path_actions(bridge_problem([1,2,4,8,16]))
+# [(2, 1, '->'), (1, 1, '<-'), (8, 16, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (4, 1, '->')]
+#
+# >>> [elapsed_time(bridge_problem([1,2,4,8,16][:N])) for N in range(6)]
+# [0, 1, 2, 7, 15, 28]
+#
+# >>> path_actions(bridge_problem([1,1,2,3,5,8,13,21]))
+# [(2, 1, '->'), (1, 1, '<-'), (8, 5, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (13, 21, '->'), (2, 2, '<-'), (2, 1, '->'), (1, 1, '<-'), (3, 1, '->')]
+#
+# >>> [elapsed_time(bridge_problem([1,1,2,3,5,8,13,21][:N])) for N in range(8)]
+# [0, 1, 1, 2, 6, 12, 19, 30]
+#
+# >>> path_actions(bridge_problem([]))
+# []
+# """
 
 # print(doctest.testmod())
 # print([(elapsed_time(bridge_problem([1,2,4,8,16][0:6])),N) for N in range(0,5)])
@@ -273,6 +272,7 @@ def test4():
 
 print(test4())
 
+@timecalls
 def bridge_problem2(here):
     """Modify this to test for goal later: after pulling a state off frontier,
     not when we are about to put it on the frontier."""
@@ -283,7 +283,7 @@ def bridge_problem2(here):
     frontier = [ [(here, frozenset())] ] # ordered list of paths we have blazed
     while frontier:
         path = frontier.pop(0)
-        here1, there1 = state1 = final_path(path)
+        here1, there1 = state1 = final_state(path)
         if not here1 or here1 == set('light'):
             return path
         explored.add(state1)
@@ -295,4 +295,26 @@ def bridge_problem2(here):
 
     return []
 
-def final_path(path): return path[-1]
+def final_state(path): return path[-1]
+
+def add_to_frontier(frontier, path):
+    "Add path to frontier, replacing costlier path if there is one."
+    #(This could be done mor efficiently.)
+    # Find if there is an old path to the final state of this path.
+    old = None
+    for i,p in enumerate(frontier):
+        if (final_state(p) == final_state(path)):
+            old = i
+            break
+    if old is not None and path_cost(frontier[old]) < path_cost(path):
+        return # Old path was better; do nothing
+    elif old is not None:
+        del frontier[old] # Old path was worse; delete it
+    ## Now add the new path and re-sort
+    frontier.append(path)
+    frontier.sort(key=path_cost) # sort还能利用树结构进行优化
+
+bridge_problem([1,1,2,3,5,8,13,21])
+bridge_problem2([1,1,2,3,5,8,13,21])
+print('bridge_problem计算用时：%s' % (timefun[bridge_problem]))
+print('bridge_problem2计算用时：%s' % (timefun[bridge_problem2]))
