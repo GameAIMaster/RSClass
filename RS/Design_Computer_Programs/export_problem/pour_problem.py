@@ -30,5 +30,16 @@ def successor(x, y, X, Y):
             (X, y): "fill X", (x, Y): "fill Y",
             (0, y): "empty X", (x, 0): "empty Y"}
 
-print(pour_problem(9, 4, 7))
+# print(pour_problem(9, 4, 7))
 # print(successor( 0,0,9, 4))
+
+import doctest
+class Test:"""
+>>> successor(0, 0, 9, 4)
+{(0, 0): 'empty Y', (9, 0): 'fill X', (0, 4): 'fill Y'}
+    """
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod(verbose=True)
