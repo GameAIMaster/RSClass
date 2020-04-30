@@ -318,3 +318,16 @@ bridge_problem([1,1,2,3,5,8,13,21])
 bridge_problem2([1,1,2,3,5,8,13,21])
 print('bridge_problem计算用时：%s' % (timefun[bridge_problem]))
 print('bridge_problem2计算用时：%s' % (timefun[bridge_problem2]))
+
+
+# --------------
+# Example problem
+#
+# Let's say the states in an optimization problem are given by integers.
+# From a state, i, the only possible successors are i+1 and i-1. Given
+# a starting integer, find the shortest path to the integer 8.
+#
+# This is an overly simple example of when we can use the
+# shortest_path_search function. We just need to define the appropriate
+# is_goal and successors functions.
+
