@@ -115,7 +115,7 @@ def test1():
                                       (1, 1, '->')]
     return 'tests pass'
 
-print(test1())
+# print(test1())
 
 
 def elapsed_time(path):
@@ -153,7 +153,7 @@ def test2():
     assert bridge_problem(frozenset((1, 2, 5, 10),))[-1][-1] == 17
     return 'tests pass'
 
-print(test2())
+# print(test2())
 
 # class TestBridge: """
 # >>> elapsed_time(bridge_problem2([1,2,5,10]))
@@ -227,7 +227,7 @@ def test3():
     return 'tests pass'
 
 
-print(test3())
+# print(test3())
 
 
 # -----------------
@@ -260,7 +260,7 @@ def bcost(action):
     # An action is an (a, b, arrow) tuple; a and b are
     # times; arrow is a string.
     a, b, arrow = action
-    return  max(a, b)
+    return max(a, b)
 
 
 def test4():
@@ -270,9 +270,9 @@ def test4():
     assert bcost((3, 10, '<-'), ) == 10
     return 'tests pass'
 
-print(test4())
+# print(test4())
 
-@timecalls
+# @timecalls
 def bridge_problem2(here):
     """Modify this to test for goal later: after pulling a state off frontier,
     not when we are about to put it on the frontier."""
@@ -314,10 +314,10 @@ def add_to_frontier(frontier, path):
     frontier.append(path)
     frontier.sort(key=path_cost) # sort还能利用树结构进行优化
 
-bridge_problem([1,1,2,3,5,8,13,21])
-bridge_problem2([1,1,2,3,5,8,13,21])
-print('bridge_problem计算用时：%s' % (timefun[bridge_problem]))
-print('bridge_problem2计算用时：%s' % (timefun[bridge_problem2]))
+# bridge_problem([1,1,2,3,5,8,13,21])
+# bridge_problem2([1,1,2,3,5,8,13,21])
+# print('bridge_problem计算用时：%s' % (timefun[bridge_problem]))
+# print('bridge_problem2计算用时：%s' % (timefun[bridge_problem2]))
 
 
 # --------------
@@ -331,3 +331,83 @@ print('bridge_problem2计算用时：%s' % (timefun[bridge_problem2]))
 # shortest_path_search function. We just need to define the appropriate
 # is_goal and successors functions.
 
+
+# -----------------
+# User Instructions
+#
+# Define a function, lowest_cost_search, that is similar to
+# shortest_path_search, but also takes into account the cost
+# of an action, as defined by the function action_cost(action)
+#
+# Since we are using this function as a generalized version
+# of the bridge problem, all the code necessary to solve that
+# problem is included below for your reference.
+#
+# This code will not run yet. Click submit to see if your code
+# is correct.
+
+
+def lowest_cost_search(start, successors, is_goal, action_cost):
+    """Return the lowest cost path, starting from start state,
+    and considering successors(state) => {state:action,...},
+    that ends in a state for which is_goal(state) is true,
+    where the cost of a path is the sum of action costs,
+    which are given by action_cost(action)."""
+    # your code here
+    export = set()  # set of states we have visited
+    frontier = [[start]]  # orderd list of paths we have blazed
+    while frontier:
+        path = frontier.pop(0)
+        state1 = final_state(path)
+        if is_goal(state1):
+            return path
+        export.add(state1)
+        pcost = path_cost(path)
+        for (state, action) in successors(state1).items():
+            if state not in export:
+                total_cost = pcost + action_cost(action)
+                path2 = path + [(action, total_cost), state]
+                add_to_frontier(frontier, path2)
+    return Fail
+
+Fail = []
+
+# -----------------
+# User Instructions
+#
+# In this problem, you will generalize the bridge problem
+# by writing a function bridge_problem3, that makes a call
+# to lowest_cost_search.
+
+def bridge_problem3(here):
+    """Find the fastest (least elapsed time) path to
+    the goal in the bridge problem."""
+    # your code here
+    here = frozenset(here) | frozenset(['light'])
+    # State will be a (people-here, people-there, time-elapsed)
+    start = (here, frozenset())  # ordered list of paths we have blazed
+    return lowest_cost_search(start, bsuccessors2, all_over, bcost) # <== your arguments here
+
+
+def all_over(state):
+    here, there = state
+    return not here or here == set(['light'])
+# your code here if necessary
+
+def test5():
+    here = [1, 2, 5, 10]
+    assert bridge_problem3(here) == [
+            (frozenset([1, 2, 'light', 10, 5]), frozenset([])),
+            ((2, 1, '->'), 2),
+            (frozenset([10, 5]), frozenset([1, 2, 'light'])),
+            ((2, 2, '<-'), 4),
+            (frozenset(['light', 10, 2, 5]), frozenset([1])),
+            ((5, 10, '->'), 14),
+            (frozenset([2]), frozenset([1, 10, 5, 'light'])),
+            ((1, 1, '<-'), 15),
+            (frozenset([1, 2, 'light']), frozenset([10, 5])),
+            ((2, 1, '->'), 17),
+            (frozenset([]), frozenset([1, 10, 2, 5, 'light']))]
+    return 'test5 passes'
+
+print(test5())
