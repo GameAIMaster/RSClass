@@ -1,5 +1,5 @@
 import doctest
-from Design_Computer_Programs.tools.Memoization import *
+# from Design_Computer_Programs.tools.Memoization import *  #用来计算执行时间
 # -----------------
 # User Instructions
 #
@@ -120,7 +120,7 @@ def test1():
 
 def elapsed_time(path):
     return path[-1][2]
-@timecalls
+# @timecalls
 def bridge_problem(here):
     """Modify this to test for goal later: after pulling a state off frontier,
     not when we are about to put it on the frontier."""
@@ -198,13 +198,13 @@ def bsuccessors2(state):
     # your code here
     here, there = state
     if 'light' in here:
-        return dict(((here  - frozenset([a,b, 'light']),
+        return dict(((here - frozenset([a,b, 'light']),
                       there | frozenset([a, b, 'light'])),
                      (a, b, '->'))
                     for a in here if a is not 'light'
                     for b in here if b is not 'light')
     else:
-        return dict(((here  | frozenset([a,b, 'light']),
+        return dict(((here | frozenset([a,b, 'light']),
                       there - frozenset([a, b, 'light'])),
                      (a, b, '<-'))
                     for a in there if a is not 'light'
@@ -411,3 +411,58 @@ def test5():
     return 'test5 passes'
 
 print(test5())
+
+
+
+# User Instructions
+#
+# In this problem you will be refactoring the bsuccessors function.
+# Your new function, bsuccessors3, will take a state as an input
+# and return a dict of {state:action} pairs.
+#
+# A state is a (here, there, light) tuple. Here and there are
+# frozensets of people (each person is represented by an integer
+# which corresponds to their travel time), and light is 0 if
+# it is on the `here` side and 1 if it is on the `there` side.
+#
+# An action is a tuple of (travelers, arrow), where the arrow is
+# '->' or '<-'. See the test() function below for some examples
+# of what your function's input and output should look like.
+
+def bsuccessors3(state):
+    """Return a dict of {state:action} pairs.  State is (here, there, light)
+    where here and there are frozen sets of people, light is 0 if the light is
+    on the here side and 1 if it is on the there side.
+    Action is a tuple (travelers, arrow) where arrow is '->' or '<-'"""
+    _, _, light = state
+    return dict(bsuccessor3(state, set([a, b]))
+                for a in state[light]
+                for b in state[light])
+
+def bsuccessor3(state, travels):
+    """The single successors state when this set of travels move"""
+    _, _, light = state
+    start = state[light] - travels
+    desk = state[1 - light ] | travels
+    if light == 0:
+        return (start, desk, 1), (travels, '->')
+    else:
+        return (desk, start, 0), (travels, '<-')
+
+def test6():
+    print(bsuccessors3((frozenset([1]), frozenset([]), 0)))
+    assert bsuccessors3((frozenset([1]), frozenset([]), 0)) == {
+            (frozenset([]), frozenset([1]), 1)  :  (set([1]), '->')}
+
+    assert bsuccessors3((frozenset([1, 2]), frozenset([]), 0)) == {
+            (frozenset([1]), frozenset([2]), 1)    :  (set([2]), '->'),
+            (frozenset([]), frozenset([1, 2]), 1)  :  (set([1, 2]), '->'),
+            (frozenset([2]), frozenset([1]), 1)    :  (set([1]), '->')}
+
+    assert bsuccessors3((frozenset([2, 4]), frozenset([3, 5]), 1)) == {
+            (frozenset([2, 4, 5]), frozenset([3]), 0)   :  (set([5]), '<-'),
+            (frozenset([2, 3, 4, 5]), frozenset([]), 0) :  (set([3, 5]), '<-'),
+            (frozenset([2, 3, 4]), frozenset([5]), 0)   :  (set([3]), '<-')}
+    return 'tests6 pass'
+
+print(test6())
