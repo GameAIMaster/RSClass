@@ -15,10 +15,10 @@ from collections import namedtuple
 # 练习使用 namedtuple
 State = namedtuple('state', "p me you pending")
 s = State(1, 2, 3, 4)
-print(s.p)
-print(s.me)
-print(s.you)
-print(s.pending)
+# print(s.p)
+# print(s.me)
+# print(s.you)
+# print(s.pending)
 
 
 def hold(state):
@@ -90,7 +90,8 @@ def hold_at(x):
 
     def strategy(state):
     # your code here
-
+        p, me, you, pending = state
+        return "hold" if (pending >= x or me + pending >= goal) else "roll"
     strategy.__name__ = 'hold_at(%d)' % x
     return strategy
 
@@ -107,3 +108,42 @@ def test():
 
 
 print(test())
+
+
+def play_pig(A, B):
+    """Play a game of pig between two players, represented by their strategies.
+    Each time through the main loop we ask the current player for one decision,
+    which must be 'hold' or 'roll', and we update the state accordingly.
+    When one player's score exceeds the goal, return that player."""
+    # your code here
+    strategies = [A,B]
+    state = (0,0,0,0)
+    while True:
+        p, me, you, pending = state
+        if me >= goal:
+            return strategies[p]
+        elif you >= goal:
+            return strategies[other_turn[p]]
+        elif strategies[p](state) == 'hold':
+            state = hold(state)
+        else:
+            state = roll(state, random.randint(1,6))
+
+
+def always_roll(state):
+    return 'roll'
+
+
+def always_hold(state):
+    return 'hold'
+
+
+def test1():
+    for _ in range(10):
+        winner = play_pig(always_hold, always_roll)
+        assert winner.__name__ == 'always_roll'
+    return 'tests1 pass'
+
+
+print(test1())
+
