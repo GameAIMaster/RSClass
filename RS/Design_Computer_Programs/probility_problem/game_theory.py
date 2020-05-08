@@ -1,3 +1,4 @@
+import math
 million = 1000000
 
 def Q(state, action, U):
@@ -11,9 +12,12 @@ def actions(state): return ["hold", 'gamble']
 
 def identity(x): return x
 
-U = identity
+# U = identity
+U = math.log10
 
 def best_action(state):
     "Return the optimal action for a state , give U."
     def EU(action): return Q(state, action, U)
     return max(actions(state),key=EU)
+
+print(best_action(10000000))
