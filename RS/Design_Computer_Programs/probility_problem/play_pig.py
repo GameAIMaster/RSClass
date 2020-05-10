@@ -147,3 +147,19 @@ def test1():
 
 print(test1())
 
+# 通过质量函数和效用函数找到最好的执行Action
+
+def Q_pig(state, action, Pwin):
+    "The expect value of choosing action in state"
+    if action is "hold":
+        return 1 - Pwin(hold(state))
+    if action is "roll":
+        return (1-Pwin(roll(state,1)) +
+                sum(roll(state, a) for a in (2, 3, 4, 5, 6))) / 6.
+    raise ValueError
+
+
+def pig_actions(state):
+    "The Legal actions from a state."
+    _,_,_,pending = state
+    return ["hold","roll"] if pending else ["roll"]
