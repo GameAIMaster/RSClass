@@ -195,10 +195,10 @@ def pig_actions(state):
     _,_,_,pending = state
     return ["hold","roll"] if pending else ["roll"]
 
-def best_action(state):
-    "Return the optimal action for a state , give U."
-    def EU(action): return Q_pig(state, action, Pwin)
-    return max(pig_actions(state),key=EU)
+def best_action(state, actions, Q, U):
+    "Return the optimal action for a state, given U."
+    def EU(action): return Q(state, action, U)
+    return max(actions(state), key=EU)
 
 #包含递归要优化
 @memo
@@ -216,7 +216,7 @@ def Pwin(state):
 
 def max_wins(state):
     "The optimal pig strategy chooses an action with the highest win probability."
-    return best_action(state)# your code here
+    return best_action(state, pig_actions, Q_pig, Pwin)# your code here
 
 
 def test3():
