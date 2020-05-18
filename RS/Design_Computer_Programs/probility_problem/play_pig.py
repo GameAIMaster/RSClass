@@ -204,7 +204,7 @@ goal = 40
 def Q_pig(state, action, U):
     "The expect value of choosing action in state"
     if action is "hold":
-        return 1 - U(hold(state))
+        return 1 - U(hold(state)) #我走完一步对方状态评分
     if action is "roll":
         return (1-U(roll(state,1)) +
                 sum(U(roll(state, a)) for a in (2, 3, 4, 5, 6))) / 6.
@@ -301,3 +301,28 @@ def test4():
     return 'tests4 pass'
 
 print (test4())
+
+
+
+from collections import defaultdict
+
+states = [(0, me, you, pending)
+          for me in range(41) for you in range(41) for pending in range(41)
+          if me + pending <= goal]
+
+print(len(states))
+r = defaultdict(int)
+for s in states: r[max_wins(s), max_diffs(s)] += 1
+print(dict(r))
+def story():
+    r = defaultdict(lambda: [0, 0])
+
+    for s in states:
+        w, d = max_wins(s), max_diffs(s)
+        if w != d:
+            _, _, _, pending = s
+            i = 0 if (w == 'roll') else 1
+            r[pending][i] += 1
+    for (delta, (wrolls, drolls)) in sorted(r.items()):
+        print("%4d: %3d %3d" % (delta, wrolls, drolls))
+story()
