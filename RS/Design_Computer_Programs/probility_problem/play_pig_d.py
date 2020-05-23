@@ -19,6 +19,37 @@
 
 import random
 
+from functools import update_wrapper
+
+
+def decorator(d):
+    "Make function d a decorator: d wraps a function fn."
+
+    def _d(fn):
+        return update_wrapper(d(fn), fn)
+
+    update_wrapper(_d, d)
+    return _d
+
+
+@decorator
+def memo(f):
+    """Decorator that caches the return value for each call to f(args).
+    Then when called again with same args, we can just look it up."""
+    cache = {}
+
+    def _f(*args):
+        try:
+            return cache[args]
+        except KeyError:
+            cache[args] = result = f(*args)
+            return result
+        except TypeError:
+            # some element of args refuses to be a dict key
+            return f(args)
+
+    _f.cache = cache
+    return _f
 
 def pig_actions_d(state):
     """The legal actions from a state. Usually, ["roll", "hold"].
@@ -33,13 +64,52 @@ def pig_actions_d(state):
     # for the other to accept or decline
     (p, me, you, pending, double) = state
     # your code here
+    if double is "double":
+        return ["accept", "decline"]
+    else:
+        result = ["roll"]
+        if pending is not 0:
+           result.append("hold")
+        if double is 1:
+            result.append("double")
+        return result
 
 
 def strategy_d(state):
-
+    "根据获胜概率最大选择最佳的策略"
+    return Pwin2(state)
 
 # your code here
 
+def Pwin2(state):
+    """The utility of a state; here just the probability that an optimal player
+    whose turn it is to move can win from the current state."""
+    _, me, you, pending, double = state
+    return Pwin3(me, you, pending, double)
+
+
+@memo
+def Pwin3(me, you, pending, double):
+    if me + pending >= goal:
+        return 1
+    elif you >= goal:
+        return 0
+    else:
+        # todo 对double 的处理
+        Proll = (1 - Pwin3(you, me + 1, 0)
+                 + sum(Pwin3(me, you, pending+a) for a in (2, 3, 4, 5, 6))) / 6
+        return (Proll if not pending else max(Proll, 1 - Pwin3(you, me + pending, 0)) )
+        return max(Q_pig(state, action, Pwin) for action in pig_actions_d(state))
+
+def Q_pig(state, action, U):
+    "The expect value of choosing action in state"
+    if action is "hold":
+        return 1 - U(do('hold',state)) #我走完一步对方状态评分
+    if action is "roll":
+        return (1-U(do('roll',state,1)) +
+                sum(U(do('roll',state, a)) for a in (2, 3, 4, 5, 6))) / 6.
+
+    raise ValueError
 
 ## You can use the code below, but don't need to modify it.
 
