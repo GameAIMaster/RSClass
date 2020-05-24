@@ -75,7 +75,7 @@ def test():
     return 'tests pass'
 
 
-print(test())
+# print(test())
 
 def text_gen():
     def N(hi): return set(range(hi+1))
@@ -86,4 +86,3 @@ def text_gen():
     # print(star(oneof('王东梁'))(N(2)))
     assert star(oneof('ab'))(N(2)) == set(['', 'a', 'aa', 'ab', 'ba', 'bb', 'b'])
     return 'test pass'
-print(text_gen())

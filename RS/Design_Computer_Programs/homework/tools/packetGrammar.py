@@ -1,33 +1,25 @@
 from Design_Computer_Programs.tools.MathLanguage import *
-# parse/convert str regular expression to API
-
-def star(x): return lambda t: (set([t]) |
-                               set(t2 for t1 in x(t) if t1 != t
-                                   for t2 in star(x)(t1)))
-
-REGRAMMAR = grammar("""
-eol => $
-dot => [.]
-lit => \w
-lits => lit lits | lit
-oneof => [[] lits []]
-RE1 => group | oneof | lit | dot
-opt => RE1 [?] 
-plus => RE1 [+] 
-star => RE1 [*] 
-staropt => RE1 [*][?]
-optstar => RE1 [?][*]
-optplus => RE1 [?][+]
-plusopt => RE1 [+][?]
-RE2 => staropt | optstar | plusopt | optplus | opt | plus | star | RE1
-seq => RE2 seq | RE2
-alt => seq [|] alt | seq
-RE => alt
-group => [(] RE [)]
+findtag = '(Write\w+[(]\s*((\w+.)*[^"]+,)*\s*stream)'
+PACKETGRAMMAR = grammar("""
+write    => Write Type ( args stream
+args     => arg , args | arg ,
+arg      => NUMBER|STRING
+Type     => uint | int | byte | array | uint64 
+stat     => if conds end | repetition do write end
+conds    => condlist else write | condlist 
+condlist => condlist elseif cond | cond
+cond     => exp then block
+repetition => for NAME = explist23 | for namelist in explist1
+explist1   => explist1 , exp  | exp 
+explist23  => exp , exp , exp | exp , exp 
+exp        => exp or exp | exp and exp | exp opt exp | not exp |nil|true|false|arg
+opt        => <= | < | >= | > | == | ~= | [-+*/]
 """)
 
-def parse_re(pattern):
-        return convert(parse('RE', pattern, REGRAMMAR))
+
+def parse_packet(pattern):
+    return convert(parse('RE', pattern, PACKETGRAMMAR))
+
 
 def convert(tree):
     "Convert a REGRAMMAR parse tree into our regex (compiler) API"
@@ -67,10 +59,9 @@ def convert(tree):
     else:
         return repr(tree)
 
+
 fail = (None, None)
 
-# result = parse_re('a')
-# # result = parse_re('[ab]*abc')
-# print(result)
-# convert(result)
 
+
+verify(PACKETGRAMMAR)

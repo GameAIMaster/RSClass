@@ -69,7 +69,7 @@ def trace(f):
     return _f
 
 def disable(f): return f
-trace=disable
+# trace=disable  #失效追踪
 # @countcalls
 # @memo
 
@@ -90,7 +90,7 @@ def fortest(): return [ a for a in range(1000) for b in range(100000)]
 
 
 
-fortest() #running this in the browser's IDE  will not display the indentations!
+# fortest() #running this in the browser's IDE  will not display the indentations!
 # print('计算用时：%s' % (timefun[fortest]))
 
 

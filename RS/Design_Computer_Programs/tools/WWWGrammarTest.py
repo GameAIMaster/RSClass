@@ -35,15 +35,5 @@ xalphas => xalpha xalphas | xalpha
 xalpha => alpha | digit | safe | extra | escape
 """, whitespace='()')
 
-# 用来查找语法中的错误，
-def verify(G):
-    lhstokens = set(G) - set([' '])
-    rhstokens = set(t for alts in G.values() for alt in alts for t in alt)
-    def show(title, tokens): print (title,'=',' '.join(sorted(tokens)))
-    show('None-Terms', G)
-    show('Terminals ', rhstokens - lhstokens)
-    show('Suspects  ', [t for t in (rhstokens - lhstokens) if t.isalnum()]) # 找到因该出现在左边的token
-    show('Orphans   ', lhstokens - rhstokens)
-
 
 verify(URL)

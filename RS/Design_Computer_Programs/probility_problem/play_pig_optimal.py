@@ -82,5 +82,6 @@ def test():
     return 'tests pass'
 
 
+print(test())
 # print(test())
 
