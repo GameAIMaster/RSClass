@@ -1,21 +1,45 @@
 from Design_Computer_Programs.tools.MathLanguage import *
-findtag = '(Write\w+[(]\s*((\w+.)*[^"]+,)*\s*stream)'
 PACKETGRAMMAR = grammar("""
-write    => Write Type ( args stream
-args     => arg , args | arg ,
-arg      => NUMBER|STRING
+packet     => _G. packetType packetName [=] BasePacket:New[(]PacketID. pakidname [)] semi?
+semi?      => [.;] | ()
+packetType => CG | GC
+packetName => name
+pakidname  => name
+
+write      => index = self:Write writeType [(] args [)] semi?
+args      => arg , args | arg 
+arg       => prefixexps . name | prefixexp [[] exp []] | name |  number
+prefixexps  => prefixexp prefixexps | prefixexp
+prefixexp  => name
+writeType  => name
+
+writelist  => write writelist | write
+repetition => for arg = explist23 | for namelist in explist1
+explist1   => exp explist1 | exp 
+explist23  => exp , exp , exp | exp , exp 
+stat       => repetition do writelist end
+exp        => nil | true | false | string | number |  not exp | exp or exp | exp and exp | exp opt exp |  arg 
+opt        => <= | < | >= | > | == | ~= | [-+*/%]
+
+string     => "[^"]*"
+name       => [a-zA-Z_][a-zA-Z0-9_]*
+number     => int frac | int
+int => -?\d[0-9]*
+frac => [.][0-9]+
+""")
+'''
+write    => Write Type [(] args stream, index, size [)] semi?
+
+
 Type     => uint | int | byte | array | uint64 
 stat     => if conds end | repetition do write end
 conds    => condlist else write | condlist 
 condlist => condlist elseif cond | cond
 cond     => exp then block
-repetition => for NAME = explist23 | for namelist in explist1
-explist1   => explist1 , exp  | exp 
-explist23  => exp , exp , exp | exp , exp 
-exp        => exp or exp | exp and exp | exp opt exp | not exp |nil|true|false|arg
-opt        => <= | < | >= | > | == | ~= | [-+*/]
-""")
+repetition => for string = explist23 | for namelist in explist1
 
+
+'''
 
 def parse_packet(pattern):
     return convert(parse('RE', pattern, PACKETGRAMMAR))
@@ -62,6 +86,11 @@ def convert(tree):
 
 fail = (None, None)
 
-
-
-verify(PACKETGRAMMAR)
+packet = "_G.CGUseItem = BasePacket:New(PacketID.PACKET_CG_USEITEM);"
+write = "index = self:WriteUInt64(l, h, stream, index, size)"
+fortest = """for i = 0, self.m_count-1 do
+        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+    end"""
+# print(parse('packet', packet, PACKETGRAMMAR))
+# print(parse('write', write, PACKETGRAMMAR))
+print(parse('stat', fortest, PACKETGRAMMAR))

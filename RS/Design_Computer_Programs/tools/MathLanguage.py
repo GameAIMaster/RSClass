@@ -46,7 +46,7 @@ Num     => [-+]?[0-9]+([.][0-9]*)?""")
 #  '*',
 #  ['Term',['Factor', ['Var', 'x']]]]],'')
 
-
+@trace
 def parse(start_symbol, text, grammar):
     """Example call: parse('Exp', '3*x + b, G.
     Returns a (tree, remainder) pair. if reminder is ''. it parsed the whole
@@ -56,6 +56,8 @@ def parse(start_symbol, text, grammar):
     Also, no left recursion allowed:don't do 'E=> T | T op E'"""
 
     tokenizer = grammar[' '] + '(%s)'
+
+    @trace
     def parse_sequence(sequence, text):
         result = []
         for atom in sequence:
@@ -63,6 +65,8 @@ def parse(start_symbol, text, grammar):
             if text is None: return Fail
             result.append(tree)
         return result, text
+
+    @trace
     @memo #提高性能，防止匹配不成功重新匹配
     def parse_atom(atom, text):
         if atom in grammar: # Non-Terminal: tuple of alternatives
@@ -78,9 +82,11 @@ def parse(start_symbol, text, grammar):
     return parse_atom(start_symbol, text)
 Fail = (None, None)
 
-# print(parse('Exp', 'wq * x + 3', G)
+# print(parse('Exp', 'wq * x + 3', G))
 
-print(re.match("(%s)" % '[(]', 'a'))
+print(re.match("\\s*(%s)" % '-?\d[0-9]*', ''' 0, self.m_count-1 do
+        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+    end'''))
 
 
 
