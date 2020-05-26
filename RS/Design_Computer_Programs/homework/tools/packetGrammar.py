@@ -8,7 +8,7 @@ pakidname  => name
 
 write      => index = self:Write writeType [(] args [)] semi?
 args      => arg , args | arg 
-arg       => prefixexps . name | prefixexp [[] exp []] | name |  number
+arg       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number
 prefixexps  => prefixexp prefixexps | prefixexp
 prefixexp  => name
 writeType  => name
@@ -17,9 +17,16 @@ writelist  => write writelist | write
 repetition => for arg = explist23 | for namelist in explist1
 explist1   => exp explist1 | exp 
 explist23  => exp , exp , exp | exp , exp 
-stat       => repetition do writelist end
-exp        => nil | true | false | string | number |  not exp | exp or exp | exp and exp | exp opt exp |  arg 
+stat       => if conds end | repetition do writelist end
+exp        => nil | true | false | string | number |  not exp | arg or exp | arg and exp | arg opt exp |  arg 
 opt        => <= | < | >= | > | == | ~= | [-+*/%]
+
+conds      => condlist else writelist
+condlist   => cond elseif cond | cond
+cond       => exp then writelist   
+laststat   => break
+laststat   => return
+laststat   => return explist1
 
 string     => "[^"]*"
 name       => [a-zA-Z_][a-zA-Z0-9_]*
@@ -29,7 +36,8 @@ frac => [.][0-9]+
 """)
 '''
 write    => Write Type [(] args stream, index, size [)] semi?
-
+这句感觉设计的不好
+arg       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number 
 
 Type     => uint | int | byte | array | uint64 
 stat     => if conds end | repetition do write end
@@ -90,7 +98,17 @@ packet = "_G.CGUseItem = BasePacket:New(PacketID.PACKET_CG_USEITEM);"
 write = "index = self:WriteUInt64(l, h, stream, index, size)"
 fortest = """for i = 0, self.m_count-1 do
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
     end"""
+iftest = """if self.m_count == 1 then
+        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
+        else
+        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
+    end"""
+
 # print(parse('packet', packet, PACKETGRAMMAR))
 # print(parse('write', write, PACKETGRAMMAR))
-print(parse('stat', fortest, PACKETGRAMMAR))
+# print(parse('stat', fortest, PACKETGRAMMAR))
+print(parse('stat', iftest, PACKETGRAMMAR))
