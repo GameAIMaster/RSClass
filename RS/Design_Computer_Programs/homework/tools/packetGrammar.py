@@ -22,10 +22,12 @@ opt        => <= | < | >= | > | == | ~= | [-+*/%]
 
 conds      => condlist else writelist
 condlist   => cond elseif condlist | cond
-cond       => exp then writelist   
+cond       => [(] exp [)] then writelist | exp then writelist  
 laststat   => break
 laststat   => return
 laststat   => return explist1
+
+
 
 string     => "[^"]*"
 name       => [a-zA-Z_][a-zA-Z0-9_]*
@@ -100,7 +102,7 @@ fortest = """for i = 0, self.m_count-1 do
 iftest = """if self.m_count == 1 then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
-        elseif (self.md) then
+        elseif (self.md[3]) then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
         else
@@ -108,7 +110,42 @@ iftest = """if self.m_count == 1 then
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
     end"""
 
+useless = """
+    _G.GCPickUpPackage = BasePacket:New(PacketID.PACKET_GC_PACKUP_PACKET);
+
+GCPickUpPackage.m_nResult = 0; -- int
+
+function GCPickUpPackage:GetSize()
+    return 1 + 1 + 1 + 1;
+end
+
+function GCPickUpPackage:ReadStream(stream, index, size)
+    ------------------------以下协议解析过程
+    print("----------------GCPickUpPackage:ReadStream-------------------------size = " .. size);
+
+    index, self.m_nResult = self:ReadInt32(stream, index, size);
+
+    return index;
+
+end
+
+--[Comment]
+--处理完毕
+function GCPickUpPackage:Execute()
+    --第二个参数没有意义
+    LuaBagManager.bIsArranging = false;
+    --if (ChangeEquipManager.Instance != null)
+    --    ChangeEquipManager.Instance.onPickUpCompleted ();
+    --Debug.Log(Time.realtimeSinceStartup);
+    --CEventSender.SendEvent(LuaEvent.ShowPublicTip, Util.LangUtil.GetKey(60273));
+    EventSender.SendEvent(LuaEvent.TidyBag,1);
+end
+
+function GCPickUpPackage:Clear()
+    GCPickUpPackage.m_nResult = 0; -- int
+end
+"""
 # print(parse('packet', packet, PACKETGRAMMAR))
 # print(parse('write', write, PACKETGRAMMAR))
-print(parse('stat', fortest, PACKETGRAMMAR))
+# print(parse('stat', fortest, PACKETGRAMMAR))
 # print(parse('stat', iftest, PACKETGRAMMAR))
