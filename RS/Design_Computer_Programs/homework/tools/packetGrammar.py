@@ -5,24 +5,23 @@ semi?      => [.;] | ()
 packetType => CG | GC
 packetName => name
 pakidname  => name
-
-write      => index = self:Write writeType [(] args [)] semi?
-args      => arg , args | arg 
-arg       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number
-prefixexps  => prefixexp prefixexps | prefixexp
-prefixexp  => name
+fullvar    => prefixexp var
+write      => index = self:Write writeType args semi?
+args      =>  [(] explist1 [)] | [(] [)] | string
+var       => name [[] exp []] | name
+prefixexp  => name [.] prefixexp | ()
 writeType  => name
 
 writelist  => write writelist | write
-repetition => for arg = explist23 | for namelist in explist1
-explist1   => exp explist1 | exp 
+repetition => for fullvar = explist23 
+explist1   => exp , explist1 | exp 
 explist23  => exp , exp , exp | exp , exp 
 stat       => if conds end | repetition do writelist end
-exp        => nil | true | false | string | number |  not exp | arg or exp | arg and exp | arg opt exp |  arg 
+exp        => nil | true | false | string | number  |not exp | fullvar or exp | fullvar and exp | fullvar opt exp | fullvar 
 opt        => <= | < | >= | > | == | ~= | [-+*/%]
 
 conds      => condlist else writelist
-condlist   => cond elseif cond | cond
+condlist   => cond elseif condlist | cond
 cond       => exp then writelist   
 laststat   => break
 laststat   => return
@@ -37,15 +36,13 @@ frac => [.][0-9]+
 '''
 write    => Write Type [(] args stream, index, size [)] semi?
 这句感觉设计的不好
-arg       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number 
+var       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number 
 
-Type     => uint | int | byte | array | uint64 
 stat     => if conds end | repetition do write end
 conds    => condlist else write | condlist 
 condlist => condlist elseif cond | cond
 cond     => exp then block
 repetition => for string = explist23 | for namelist in explist1
-
 
 '''
 
@@ -103,6 +100,9 @@ fortest = """for i = 0, self.m_count-1 do
 iftest = """if self.m_count == 1 then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
+        elseif (self.md) then
+        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
         else
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
@@ -110,5 +110,5 @@ iftest = """if self.m_count == 1 then
 
 # print(parse('packet', packet, PACKETGRAMMAR))
 # print(parse('write', write, PACKETGRAMMAR))
-# print(parse('stat', fortest, PACKETGRAMMAR))
-print(parse('stat', iftest, PACKETGRAMMAR))
+print(parse('stat', fortest, PACKETGRAMMAR))
+# print(parse('stat', iftest, PACKETGRAMMAR))
