@@ -84,9 +84,9 @@ Fail = (None, None)
 
 # print(parse('Exp', 'wq * x + 3', G))
 
-print(re.match("\\s*(%s)" % '-?\d[0-9]*', ''' 0, self.m_count-1 do
-        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
-    end'''))
+# print(re.match("\\s*(%s)" % '-?\d[0-9]*', ''' 0, self.m_count-1 do
+#         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
+#     end'''))
 
 
 
