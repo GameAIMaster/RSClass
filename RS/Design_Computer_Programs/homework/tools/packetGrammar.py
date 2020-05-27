@@ -27,7 +27,7 @@ laststat   => break
 laststat   => return
 laststat   => return explist1
 
-
+useless    => [?!_G] | [?!Write] | [?!if] | [?!for]
 
 string     => "[^"]*"
 name       => [a-zA-Z_][a-zA-Z0-9_]*
@@ -39,7 +39,7 @@ frac => [.][0-9]+
 write    => Write Type [(] args stream, index, size [)] semi?
 这句感觉设计的不好
 var       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number 
-
+https://blog.csdn.net/abcjennifer/article/details/46821401
 stat     => if conds end | repetition do write end
 conds    => condlist else write | condlist 
 condlist => condlist elseif cond | cond
