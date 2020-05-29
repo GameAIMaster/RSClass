@@ -2,6 +2,7 @@
 则狼要吃羊，羊要吃菜，但是船很小，只够农夫带一样东西过河。
 问农夫该如何解此难题？
 解：state包含河there,here两边的状态,there:frozenset(['farmer','sheep','wolf','vegetables','ship'] action:(1,2,'->')"""
+# from Design_Computer_Programs.tools.MathLanguage import *
 def csuccessor(state):
     there, here = state
     if 'farmer' in there and 'ship' in there:

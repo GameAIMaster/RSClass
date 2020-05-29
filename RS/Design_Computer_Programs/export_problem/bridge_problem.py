@@ -15,7 +15,7 @@ import doctest
 # person crosses, person2 will be the same as person one, so the
 # action (2, 2, '->') means that the person with a travel time of
 # 2 crossed from here to there alone.
-
+from Design_Computer_Programs.tools.MathLanguage import *
 def bsuccessors(state):
     """Return a dict of {state:action} pairs. A state is a (here, there, t) tuple,
     where here and there are frozensets of people (indicated by their times) and/or
@@ -190,7 +190,7 @@ def test2():
 
 # print(doctest.testmod())
 # print([(elapsed_time(bridge_problem([1,2,4,8,16][0:6])),N) for N in range(0,5)])
-
+# @memo
 def bsuccessors2(state):
     """Return a dict of {state:action} pairs. A state is a
     (here, there) tuple, where here and there are frozensets
@@ -227,7 +227,7 @@ def test3():
     return 'tests pass'
 
 
-# print(test3())
+print(test3())
 
 
 # -----------------

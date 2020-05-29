@@ -1,4 +1,5 @@
 from Design_Computer_Programs.tools.MathLanguage import *
+from Design_Computer_Programs.homework.tools.unparse import Unparser
 PACKETGRAMMAR = grammar("""
 packet     => _G. packetType packetName [=] BasePacket:New[(]PacketID. pakidname [)] semi?
 semi?      => [.;] | ()
@@ -30,7 +31,7 @@ laststat   => return explist1
 uselesslist => useless uselesslist | useless
 useless    => ((?!index\\s[=])(?!_G)(?!if)(?!for).)+
 
-file       => ?uselesslist packet uselesslist writelist ?uselesslist ?repetition ?stat ?writelist 
+file       => ?uselesslist packet uselesslist writelist ?uselesslist ?stat ?writelist ?uselesslist
 ?uselesslist => uselesslist | ()
 ?repetition => repetition | ()
 ?stat      => stat | ()
@@ -42,39 +43,22 @@ number     => int frac | int
 int => -?\d[0-9]*
 frac => [.][0-9]+
 """)
-'''
-write    => Write Type [(] args stream, index, size [)] semi?
-这句感觉设计的不好
-var       => prefixexps . name [[] exp []] | prefixexps . name | name [[] exp []] | name |  number 
-https://blog.csdn.net/abcjennifer/article/details/46821401
-stat     => if conds end | repetition do write end
-conds    => condlist else write | condlist 
-condlist => condlist elseif cond | cond
-cond     => exp then block
-repetition => for string = explist23 | for namelist in explist1
-(?!_G).+ | (?!index).+ | (?!if).+ | (?!for).+ 
-
-'''
 
 def parse_packet(pattern):
-    return convert(parse('RE', pattern, PACKETGRAMMAR))
+    return convert(parse('file', pattern[0], PACKETGRAMMAR))
 
 
 def convert(tree):
     "Convert a REGRAMMAR parse tree into our regex (compiler) API"
     root = tree[0]
-    names = {
-        'optplus': 'plus(opt({x}))',
-        'plusopt': 'opt(plus({x}))',
-        'staropt': 'opt(star({x}))',
-        'optstar': 'star(opt({x}))',
-    }
     if isinstance(tree, list):
         try:
-            if root in ('plus', 'star', 'opt', 'lit'):
-                return '{r}({x})'.format(r=root, x=convert(tree[1]))
-            elif root in ('optplus', 'plusopt', 'staropt', 'optstar'):
-                return names[root].format(x=convert(tree[1]))
+            if root is ('uselesslist?'):
+                if isinstance(tree[1], list):
+                    return
+                return convert(tree[1])
+            elif root is ('uselesslist'):
+                return
             elif root == 'oneof':
                 return 'oneof({x})'.format(x=convert(tree[2]))
             elif root == 'group':
@@ -184,7 +168,9 @@ function CGAskDiscardItem:WriteStream(stream, index, size)
     index = self:WriteByte(containerType, stream, index, size);
     index = self:WriteByte(bagIndex, stream, index, size);
     index = self:WriteUInt32(tableIndex, stream, index, size);
-
+    for i = 0, self.EquipFlagsLen-1 do
+        index = self:WriteUInt32(self.m_flages[i], stream, index, size);
+    end
     return index;
 end
 
@@ -193,4 +179,8 @@ end
 # print(parse('write', write, PACKETGRAMMAR))
 # print(parse('stat', fortest, PACKETGRAMMAR))
 # print(parse('stat', iftest, PACKETGRAMMAR))
-print(parse('file', useless_test, PACKETGRAMMAR))
+
+tree = parse('file', useless_test, PACKETGRAMMAR)
+print(tree)
+
+Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'

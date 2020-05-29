@@ -69,7 +69,7 @@ def trace(f):
     return _f
 
 def disable(f): return f
-# trace=disable  #失效追踪
+trace=disable  #失效追踪
 # @countcalls
 # @memo
 
