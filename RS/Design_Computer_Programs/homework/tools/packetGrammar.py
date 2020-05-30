@@ -18,6 +18,7 @@ repetition => for fullvar = explist23
 explist1   => exp , explist1 | exp 
 explist23  => exp , exp , exp | exp , exp 
 stat       => if conds end | repetition do writelist end
+statlist   => stat statlist | stat
 exp        => nil | true | false | string | number  |not exp | fullvar or exp | fullvar and exp | fullvar opt exp | fullvar 
 opt        => <= | < | >= | > | == | ~= | [-+*/%]
 
@@ -31,11 +32,11 @@ laststat   => return explist1
 uselesslist => useless uselesslist | useless
 useless    => ((?!index\\s[=])(?!_G)(?!if)(?!for).)+
 
-file       => ?uselesslist packet uselesslist writelist ?uselesslist ?stat ?writelist ?uselesslist
+file       => ?uselesslist packet uselesslist writelist ?uselesslist ?statlist ?writelist ?uselesslist
 ?uselesslist => uselesslist | ()
-?repetition => repetition | ()
-?stat      => stat | ()
-?writelist => writelist | ()
+?repetition  => repetition | ()
+?statlist    => statlist | ()
+?writelist   => writelist | ()
 
 string     => "[^"]*"
 name       => [a-zA-Z_][a-zA-Z0-9_]*
@@ -171,6 +172,11 @@ function CGAskDiscardItem:WriteStream(stream, index, size)
     for i = 0, self.EquipFlagsLen-1 do
         index = self:WriteUInt32(self.m_flages[i], stream, index, size);
     end
+    
+    if CGAskCaptainBookOpt.nOptType >= 5 and CGAskCaptainBookOpt.nOptType <= 4 then
+        index = self:WriteInt32(CGAskCaptainBookOpt.nBookEventID, stream, index, size)
+    end
+    
     return index;
 end
 
@@ -183,4 +189,4 @@ end
 tree = parse('file', useless_test, PACKETGRAMMAR)
 print(tree)
 
-Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
+# Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
