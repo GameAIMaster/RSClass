@@ -35,8 +35,8 @@ def instrument_fn(fn, *args):
 
 class TagListGen:
     def collect_list(self, tree, tag):
-        "找到所有包含标签的list"
-        for t in tree:
+        "找到所有包含标签的list,如果不是list返回索引"
+        for i, t in enumerate(tree):
             if isinstance(t, list):
                 root = t[0]
                 if root in tag:
@@ -44,6 +44,8 @@ class TagListGen:
                 else:
                     for t1 in self.collect_list(t, tag):
                         yield t1
+            elif root in tag:
+                yield i
 
 class Unparser:
     """Methods in this class recursively traverse an AST and
@@ -69,8 +71,8 @@ class Unparser:
         self.f.write(text)
 
     def enter(self):
-        "Print ':', and increase the indentation."
-        self.write(":")
+        "Print 'then', and increase the indentation."
+        self.write("then")
         self._indent += 1
 
     def leave(self):
@@ -134,22 +136,27 @@ class Unparser:
         """解析for语句或解析if语句"""
         genif = TagListGen()
         genfor = TagListGen()
-        try:
-            if_content = next(genif.collect_list(tree, 'if'))
-            print(if_content)
-        except StopIteration:
-            pass
-        try:
-            for_content = next(genfor.collect_list(tree,'repetition'))
-            print(for_content)
-        except StopIteration:
-            pass
+        if tree[1] is 'if':
+            print(tree)
+        else:
+            print(tree)
+            # tree[1] is 'repetition'
+        # try:
+        #     if_content = next(genif.collect_list(tree, 'if'))
+        #     print(if_content)
+        # except StopIteration:
+        #     pass
+        # try:
+        #     for_content = next(genfor.collect_list(tree,'repetition'))
+        #     print(for_content)
+        # except StopIteration:
+        #     pass
 
     def _if(self, tree):
         self.fill("if ")
         gen_exp = TagListGen()
-        exp = next(gen_exp.collect_list(tree, 'exp'))
-
+        cond = next(gen_exp.collect_list(tree, 'cond'))
+        # 从var
 
         self.dispatch(tree.test)
         self.enter()

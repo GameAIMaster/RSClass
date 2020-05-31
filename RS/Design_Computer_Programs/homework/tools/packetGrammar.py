@@ -47,45 +47,6 @@ int => -?\d[0-9]*
 frac => [.][0-9]+
 """)
 
-def parse_packet(pattern):
-    return convert(parse('file', pattern[0], PACKETGRAMMAR))
-
-
-def convert(tree):
-    "Convert a REGRAMMAR parse tree into our regex (compiler) API"
-    root = tree[0]
-    if isinstance(tree, list):
-        try:
-            if root is ('uselesslist?'):
-                if isinstance(tree[1], list):
-                    return
-                return convert(tree[1])
-            elif root is ('uselesslist'):
-                return
-            elif root == 'oneof':
-                return 'oneof({x})'.format(x=convert(tree[2]))
-            elif root == 'group':
-                return convert(tree[2])
-            elif root == 'alt':
-                if len(tree) == 2:
-                    return convert(tree[1])
-                else:
-                    return 'alt({a}, {b})'.format(a=convert(tree[1]),
-                                                  b=convert(tree[3]))
-            elif root in ('seq', 'lits'):
-                if len(tree) == 2:
-                    return convert(tree[1])
-                else:
-                    return 'seq({a})'.format(a=', '.join(map(convert, tree[1:])))
-            else:
-                return convert(tree[1])
-        except Exception as err:
-            print('tree: {t}'.format(t=tree))
-            raise
-    else:
-        return repr(tree)
-
-
 fail = (None, None)
 
 packet = "_G.CGUseItem = BasePacket:New(PacketID.PACKET_CG_USEITEM);"
@@ -177,6 +138,7 @@ function CGAskDiscardItem:WriteStream(stream, index, size)
     
     if CGAskCaptainBookOpt.nOptType >= 5 and CGAskCaptainBookOpt.nOptType <= 4 then
         index = self:WriteInt32(CGAskCaptainBookOpt.nBookEventID, stream, index, size)
+    else if CGAskCaptainBookOpt.nOptType == 3 then
     end
     
     return index;
@@ -188,7 +150,7 @@ end
 # print(parse('stat', fortest, PACKETGRAMMAR))
 # print(parse('stat', iftest, PACKETGRAMMAR))
 
-tree = parse('file', useless_test, PACKETGRAMMAR)
+tree = parse('statlist', iftest, PACKETGRAMMAR)
 print(tree)
 
-# Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
+Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
