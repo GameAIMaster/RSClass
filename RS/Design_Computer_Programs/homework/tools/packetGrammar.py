@@ -19,10 +19,12 @@ explist1   => exp , explist1 | exp
 explist23  => exp , exp , exp | exp , exp 
 stat       => if conds end | repetition do writelist end
 statlist   => stat statlist | stat
-exp        => nil | true | false | string | number  |not exp | fullvar or exp | fullvar and exp | fullvar opt exp | fullvar 
+exp        => preexp remindexp | preexp
+preexp     => nil | true | false | string | number | fullvar 
+remindexp  => or exp | and exp | opt exp 
 opt        => <= | < | >= | > | == | ~= | [-+*/%]
 
-conds      => condlist else writelist
+conds      => condlist else writelist | condlist
 condlist   => cond elseif condlist | cond
 cond       => [(] exp [)] then writelist | exp then writelist  
 laststat   => break
