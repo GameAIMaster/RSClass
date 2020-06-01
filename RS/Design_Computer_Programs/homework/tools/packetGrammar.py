@@ -19,11 +19,12 @@ explist1   => exp , explist1 | exp
 explist23  => exp , exp , exp | exp , exp 
 stat       => if conds end | repetition do writelist end
 statlist   => stat statlist | stat
-exp        => preexplist arg | arg
+exp        => preexplist remindexp | remindexp
+remindexp  => arg
 arg        => nil | true | false | string | number | fullvar 
 preexplist => preexp preexplist | preexp
-preexp     => arg or | arg and | arg opt 
-opt        => <= | < | >= | > | == | ~= | [-+*/%]
+preexp     => arg opt 
+opt        =>  and | or | <= | < | >= | > | == | ~= | [-+*/%] 
 
 conds      => cond eliflist else writelist | cond
 eliflist   => elseif cond eliflist | () 
@@ -59,7 +60,7 @@ fortest = """for i = 0, self.m_count-1 do
 iftest = """if self.m_count == 1 and self.m_count == 2 then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
-        elseif (self.md[3]) then
+        elseif (self.md[xx]) then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
         else
@@ -154,4 +155,4 @@ end
 tree = parse('statlist', iftest, PACKETGRAMMAR)
 print(tree)
 
-# Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
+Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
