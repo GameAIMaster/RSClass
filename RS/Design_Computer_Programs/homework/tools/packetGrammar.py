@@ -24,8 +24,8 @@ preexp     => nil | true | false | string | number | fullvar
 remindexp  => or exp | and exp | opt exp 
 opt        => <= | < | >= | > | == | ~= | [-+*/%]
 
-conds      => condlist else writelist | condlist
-condlist   => cond elseif condlist | cond
+conds      => cond eliflist else writelist | cond
+eliflist   => elseif cond eliflist | () 
 cond       => [(] exp [)] then writelist | exp then writelist  
 laststat   => break
 laststat   => return
