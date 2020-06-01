@@ -34,6 +34,7 @@ def instrument_fn(fn, *args):
     print('%s got %s with %5d iters over %7d items' % (fn.__name__, result, c.starts, c.items))
 
 class TagListGen:
+    @memo
     def collect_list(self, tree, tag):
         "找到所有包含标签的list,如果不是list返回索引"
         for i, t in enumerate(tree):
@@ -46,6 +47,8 @@ class TagListGen:
                         yield t1
             elif t == tag:
                 yield i
+
+    @memo
     def collect_list_deep(self, tree, tag):
         "找到所有包含标签的list,若果返回的list也包含标签也返回,如果不是list返回索引"
         for i, t in enumerate(tree):
@@ -53,7 +56,7 @@ class TagListGen:
                 root = t[0]
                 if root == tag:
                     yield t
-                for t1 in self.collect_list(t, tag):
+                for t1 in self.collect_list_deep(t, tag):
                     if isinstance(t1, list):
                         yield t1
             elif t == tag:
@@ -83,8 +86,8 @@ class Unparser:
         self.f.write(text)
 
     def enter(self):
-        "Print 'then', and increase the indentation."
-        self.write("then")
+        "Print ':', and increase the indentation."
+        self.write(":")
         self._indent += 1
 
     def leave(self):
@@ -104,6 +107,7 @@ class Unparser:
                     self.dispatch(t)
         return
 
+    @memo
     def find_end_element(self, tree):
         "Dispatcher function, dispatching tree type T to method _T."
         if isinstance(tree[-1], list):
@@ -178,21 +182,20 @@ class Unparser:
         """parse if content"""
         self.fill("if ")
         gen_cond = TagListGen()
-        for cond in gen_cond.collect_list(tree, 'cond'):
-            # 打印里面所有的var，opt，and\or
-            gen_preexp = TagListGen()
-            for preexp in gen_preexp.collect_list(cond, 'preexp'):
-                arg = next(gen_preexp.collect_list(preexp, 'arg'))
-                opt = next(gen_preexp.collect_list(preexp, 'opt'))
-                print(self.find_end_element(arg), self.find_end_element(opt))
-        remindexp = next(gen_cond.collect_list(cond, 'remindexp'))
-        for arg in gen_preexp.collect_list_deep(remindexp, 'arg'):
-            print(self.find_end_element(arg))
-
-
-
-
-
+        cond = next(gen_cond.collect_list(tree, 'cond'))
+        self.write(self._expstr(cond))
+        self.enter()
+        #
+        # for cond in gen_cond.collect_list(tree, 'cond'):
+        #     # 打印里面所有的var，opt，and\or
+        #     gen_preexp = TagListGen()
+        #     for preexp in gen_preexp.collect_list(cond, 'preexp'):
+        #         arg = next(gen_preexp.collect_list(preexp, 'arg'))
+        #         opt = next(gen_preexp.collect_list(preexp, 'opt'))
+        #         print(self.find_end_element(arg), self.find_end_element(opt))
+        #     remindexp = next(gen_cond.collect_list(cond, 'remindexp'))
+        #     for var in gen_preexp.collect_list_deep(remindexp, 'var'):
+        #         print(self.find_end_element(var[1]))
 
         # 从var
 
@@ -215,6 +218,21 @@ class Unparser:
         #     self.enter()
         #     self.dispatch(t.orelse)
         #     self.leave()
+    def _expstr(self, cond):
+        str = ''
+        gen_cond = TagListGen()
+        try:
+            for preexp in gen_cond.collect_list(cond, 'preexp'):
+                arg = next(gen_cond.collect_list(preexp, 'arg'))
+                opt = next(gen_cond.collect_list(preexp, 'opt'))
+                str += self.find_end_element(arg)+ ' '
+                str += self.find_end_element(opt)+' '
+            remindexp = next(gen_cond.collect_list(cond, 'remindexp'))
+            for var in gen_cond.collect_list_deep(remindexp, 'arg'):
+                str += self.find_end_element(var[1])+' '
+            return str
+        except StopIteration:
+            pass
 
     def _Module(self, tree):
         for stmt in tree.body:
