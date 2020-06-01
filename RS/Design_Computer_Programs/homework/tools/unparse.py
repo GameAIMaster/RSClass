@@ -39,12 +39,24 @@ class TagListGen:
         for i, t in enumerate(tree):
             if isinstance(t, list):
                 root = t[0]
-                if root in tag:
+                if root == tag:
                     yield t
                 else:
                     for t1 in self.collect_list(t, tag):
                         yield t1
-            elif root in tag:
+            elif t == tag:
+                yield i
+    def collect_list_deep(self, tree, tag):
+        "找到所有包含标签的list,若果返回的list也包含标签也返回,如果不是list返回索引"
+        for i, t in enumerate(tree):
+            if isinstance(t, list):
+                root = t[0]
+                if root == tag:
+                    yield t
+                for t1 in self.collect_list(t, tag):
+                    if isinstance(t1, list):
+                        yield t1
+            elif t == tag:
                 yield i
 
 class Unparser:
@@ -78,7 +90,7 @@ class Unparser:
     def leave(self):
         "Decrease the indentation level."
         self._indent -= 1
-    # @memo
+    @memo
     def dispatch(self, tree):
         "Dispatcher function, dispatching tree type T to method _T."
         for t in tree:
@@ -91,6 +103,13 @@ class Unparser:
                 else:
                     self.dispatch(t)
         return
+
+    def find_end_element(self, tree):
+        "Dispatcher function, dispatching tree type T to method _T."
+        if isinstance(tree[-1], list):
+            return self.find_end_element(tree[-1])
+        else:
+            return tree[-1]
 
         # res = hasattr(self, "_"+tree)
         # if res:
@@ -115,6 +134,9 @@ class Unparser:
     def _name(self, tree):
         return tree[1]
 
+    def _opt(self, tree):
+        return tree[1]
+
     def _write(self, tree):
         # 存储一条写包语句的类型和变量名
         write_type = self._writeType(tree[4])
@@ -136,8 +158,8 @@ class Unparser:
         """解析for语句或解析if语句"""
         genif = TagListGen()
         genfor = TagListGen()
-        if tree[1] is 'if':
-            print(tree)
+        if tree[1] in 'if':
+            self._if(tree)
         else:
             print(tree)
             # tree[1] is 'repetition'
@@ -153,30 +175,46 @@ class Unparser:
         #     pass
 
     def _if(self, tree):
+        """parse if content"""
         self.fill("if ")
-        gen_exp = TagListGen()
-        cond = next(gen_exp.collect_list(tree, 'cond'))
+        gen_cond = TagListGen()
+        for cond in gen_cond.collect_list(tree, 'cond'):
+            # 打印里面所有的var，opt，and\or
+            gen_preexp = TagListGen()
+            for preexp in gen_preexp.collect_list(cond, 'preexp'):
+                arg = next(gen_preexp.collect_list(preexp, 'arg'))
+                opt = next(gen_preexp.collect_list(preexp, 'opt'))
+                print(self.find_end_element(arg), self.find_end_element(opt))
+        remindexp = next(gen_cond.collect_list(cond, 'remindexp'))
+        for arg in gen_preexp.collect_list_deep(remindexp, 'arg'):
+            print(self.find_end_element(arg))
+
+
+
+
+
+
         # 从var
 
-        self.dispatch(tree.test)
-        self.enter()
-        self.dispatch(tree.body)
-        self.leave()
-        # collapse nested ifs into equivalent elifs.
-        while (t.orelse and len(t.orelse) == 1 and
-               isinstance(t.orelse[0], ast.If)):
-            t = t.orelse[0]
-            self.fill("elif ")
-            self.dispatch(t.test)
-            self.enter()
-            self.dispatch(t.body)
-            self.leave()
-        # final else
-        if tree.orelse:
-            self.fill("else")
-            self.enter()
-            self.dispatch(t.orelse)
-            self.leave()
+        # self.dispatch(tree.test)
+        # self.enter()
+        # self.dispatch(tree.body)
+        # self.leave()
+        # # collapse nested ifs into equivalent elifs.
+        # while (t.orelse and len(t.orelse) == 1 and
+        #        isinstance(t.orelse[0], ast.If)):
+        #     t = t.orelse[0]
+        #     self.fill("elif ")
+        #     self.dispatch(t.test)
+        #     self.enter()
+        #     self.dispatch(t.body)
+        #     self.leave()
+        # # final else
+        # if tree.orelse:
+        #     self.fill("else")
+        #     self.enter()
+        #     self.dispatch(t.orelse)
+        #     self.leave()
 
     def _Module(self, tree):
         for stmt in tree.body:
