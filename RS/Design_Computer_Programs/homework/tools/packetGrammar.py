@@ -60,7 +60,7 @@ fortest = """for i = 0, self.m_count-1 do
 iftest = """if self.m_count == 1 and self.m_count == 2 then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
-        elseif (self.md[xx]) then
+        elseif (self.md >= 2) then
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
         else

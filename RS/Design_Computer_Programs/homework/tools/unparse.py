@@ -180,11 +180,28 @@ class Unparser:
 
     def _if(self, tree):
         """parse if content"""
-        self.fill("if ")
         gen_cond = TagListGen()
-        cond = next(gen_cond.collect_list(tree, 'cond'))
-        self.write(self._expstr(cond))
-        self.enter()
+        for i, cond in enumerate(gen_cond.collect_list(tree, 'cond')):
+            if i is 0:
+                self.fill("if ")
+            else:
+                self.fill("elif ")
+            self.write(self._expstr(cond))
+            self.enter()
+            for writeconten in gen_cond.collect_list(cond, 'write'):
+                self._write(writeconten)
+            self.leave()
+        # 处理else
+        try:
+            conds = next(gen_cond.collect_list(tree, 'conds'))
+            if isinstance(conds, list):
+                if conds[3] == 'else':
+                    # 打印后面的writelist
+                    self.fill('else')
+                    for writeconten in gen_cond.collect_list(conds[4], 'write'):
+                        self._write(writeconten)
+        except IndexError:
+            pass
         #
         # for cond in gen_cond.collect_list(tree, 'cond'):
         #     # 打印里面所有的var，opt，and\or
