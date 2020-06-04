@@ -14,7 +14,7 @@ prefixexp  => name [.] prefixexp | ()
 writeType  => name
 
 writelist  => write writelist | write
-repetition => for fullvar = explist23 
+repetition => for var = explist23 
 explist1   => exp , explist1 | exp 
 explist23  => exp , exp , exp | exp , exp 
 stat       => if conds end | repetition do writelist end
@@ -152,7 +152,7 @@ end
 # print(parse('stat', fortest, PACKETGRAMMAR))
 # print(parse('stat', iftest, PACKETGRAMMAR))
 
-tree = parse('statlist', iftest, PACKETGRAMMAR)
+tree = parse('statlist', fortest, PACKETGRAMMAR)
 print(tree)
 
 Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'

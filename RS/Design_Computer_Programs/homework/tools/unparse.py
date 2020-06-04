@@ -147,6 +147,11 @@ class Unparser:
         write_arg = self._args(tree[5])[0]
         print("writeType：%s writeName: %s" % (write_type, write_arg))
 
+    def _writelist(self, tree):
+        gen_cond = TagListGen()
+        for writeconten in gen_cond.collect_list(tree, 'write'):
+            self._write(writeconten)
+
     def _args(self, tree):
         # 提取参数变量
         args = []
@@ -162,10 +167,11 @@ class Unparser:
         """解析for语句或解析if语句"""
         genif = TagListGen()
         genfor = TagListGen()
-        if tree[1] in 'if':
+        if tree[1] == 'if':
             self._if(tree)
-        else:
-            print(tree)
+        elif tree[1][0] == 'repetition':
+            self._repetition(tree[1])
+            self._writelist(tree[3])
             # tree[1] is 'repetition'
         # try:
         #     if_content = next(genif.collect_list(tree, 'if'))
@@ -188,8 +194,7 @@ class Unparser:
                 self.fill("elif ")
             self.write(self._expstr(cond))
             self.enter()
-            for writeconten in gen_cond.collect_list(cond, 'write'):
-                self._write(writeconten)
+            self._writelist(cond)
             self.leave()
         # 处理else
         try:
@@ -198,8 +203,7 @@ class Unparser:
                 if conds[3] == 'else':
                     # 打印后面的writelist
                     self.fill('else')
-                    for writeconten in gen_cond.collect_list(conds[4], 'write'):
-                        self._write(writeconten)
+                    self._writelist(conds[4])
         except IndexError:
             pass
         #
@@ -235,7 +239,26 @@ class Unparser:
         #     self.enter()
         #     self.dispatch(t.orelse)
         #     self.leave()
+
+    def _repetition(self, tree):
+        #todo
+        self.fill("for ")
+        gen_for = TagListGen()
+        var = next(gen_for.collect_list(tree, 'name'))# var
+        self.write(var[1]) # var -> name
+        self.write(" in range(")
+        for i,exp in enumerate(gen_for.collect_list(tree, 'exp')):
+            if i is 0:
+                self.write(self._expstr(exp))  # = explist23
+                self.write(", ")
+            elif i is 1:
+                self.write(self._expstr(exp))  # = explist23
+                self.write(')')
+        self.enter()
+
+
     def _expstr(self, cond):
+        # 返回表达式字符串
         str = ''
         gen_cond = TagListGen()
         try:
