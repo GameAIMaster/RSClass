@@ -128,11 +128,11 @@ class Unparser:
     # currently doesn't.                                   #
     ########################################################
     def _packetType(self, tree):
-        print("packetType%s" % tree[1])
+        print("packetType:  %s" % tree[1])
         return tree[1]
 
     def _packetName(self, tree):
-        print("packetName%s" % self._name(tree[1]))
+        print("packetName:  %s" % self._name(tree[1]))
         return self._name(tree[1])
 
     def _name(self, tree):
@@ -145,7 +145,7 @@ class Unparser:
         # 存储一条写包语句的类型和变量名
         write_type = self._writeType(tree[4])
         write_arg = self._args(tree[5])[0]
-        print("writeType：%s writeName: %s" % (write_type, write_arg))
+        self.fill("writeType：%s writeName: %s" % (write_type, write_arg))
 
     def _writelist(self, tree):
         gen_cond = TagListGen()
@@ -172,6 +172,7 @@ class Unparser:
         elif tree[1][0] == 'repetition':
             self._repetition(tree[1])
             self._writelist(tree[3])
+            self.leave()
             # tree[1] is 'repetition'
         # try:
         #     if_content = next(genif.collect_list(tree, 'if'))

@@ -26,7 +26,7 @@ preexplist => preexp preexplist | preexp
 preexp     => arg opt 
 opt        =>  and | or | <= | < | >= | > | == | ~= | [-+*/%] 
 
-conds      => cond eliflist else writelist | cond
+conds      => cond eliflist else writelist | cond eliflist | cond
 eliflist   => elseif cond eliflist | () 
 cond       => [(] exp [)] then writelist | exp then writelist  
 laststat   => break
@@ -57,16 +57,11 @@ fortest = """for i = 0, self.m_count-1 do
         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
         index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
     end"""
-iftest = """if self.m_count == 1 and self.m_count == 2 then
-        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
-        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
-        elseif (self.md >= 2) then
-        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
-        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
-        else
-        index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);
-        index = self:WriteINT32(self.m_ItemIndex[i], stream, index, size);
-    end"""
+iftest = """if CGAskCaptainBookOpt.nOptType >= 5 and CGAskCaptainBookOpt.nOptType <= 4 then
+                index = self:WriteInt32(CGAskCaptainBookOpt.nBookEventID, stream, index, size)
+            elseif CGAskCaptainBookOpt.nOptType == 3 then
+                index = self:WriteInt32(CGAskCaptainBookOpt.nBookEventID, stream, index, size)
+            end"""
 
 useless = """
     _G.GCPickUpPackage = BasePacket:New(PacketID.PACKET_GC_PACKUP_PACKET);
@@ -140,7 +135,8 @@ function CGAskDiscardItem:WriteStream(stream, index, size)
     
     if CGAskCaptainBookOpt.nOptType >= 5 and CGAskCaptainBookOpt.nOptType <= 4 then
         index = self:WriteInt32(CGAskCaptainBookOpt.nBookEventID, stream, index, size)
-    else if CGAskCaptainBookOpt.nOptType == 3 then
+    elseif CGAskCaptainBookOpt.nOptType == 3 then
+        index = self:WriteInt32(CGAskCaptainBookOpt.nBookEventID, stream, index, size)
     end
     
     return index;
@@ -152,7 +148,7 @@ end
 # print(parse('stat', fortest, PACKETGRAMMAR))
 # print(parse('stat', iftest, PACKETGRAMMAR))
 
-tree = parse('statlist', fortest, PACKETGRAMMAR)
-print(tree)
+tree = parse('file', useless_test, PACKETGRAMMAR)
+# print(tree)
 
 Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
