@@ -132,7 +132,7 @@ class Unparser:
         return tree[1]
 
     def _packetName(self, tree):
-        print("packetName:  %s" % self._name(tree[1]))
+        print("packetName  %s" % self._name(tree[1]))
         return self._name(tree[1])
 
     def _name(self, tree):
