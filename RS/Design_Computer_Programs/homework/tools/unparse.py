@@ -147,10 +147,21 @@ class Unparser:
         write_arg = self._args(tree[5])[0]
         self.fill("writeType：%s writeName: %s" % (write_type, write_arg))
 
-    def _writelist(self, tree):
+    def _read(self, tree):
+        # 存储一条写包语句的类型和变量名
+        read_type = self._writeType(tree[5])
+        read_arg = self._args(tree[2])[0]
+        self.fill("readType：%s readName: %s" % (read_type, read_arg))
+
+    def _writeorreadlist(self, tree):
         gen_cond = TagListGen()
-        for writeconten in gen_cond.collect_list(tree, 'write'):
-            self._write(writeconten)
+        if tree[1][0] == 'write':
+            for writeconten in gen_cond.collect_list(tree, 'write'):
+                self._write(writeconten)
+        else:
+            for readconten in gen_cond.collect_list(tree, 'read'):
+                self._read(readconten)
+
 
     def _args(self, tree):
         # 提取参数变量
