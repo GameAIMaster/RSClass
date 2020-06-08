@@ -19,8 +19,13 @@ writeorreadlist  => write writeorreadlist | read writeorreadlist | write | read
 repetition => for var = explist23 
 explist1   => exp , explist1 | exp 
 explist23  => exp , exp , exp | exp , exp 
-stat       => if conds end | repetition do writeorreadlist end
+
 statlist   => stat statlist | stat
+
+conds      => cond eliflist else statlist | cond eliflist | cond
+cond       => [(] exp [)] then statlist | exp then statlist
+stat       => if conds end | repetition do statlist end | writeorreadlist
+
 exp        => preexplist remindexp | remindexp
 remindexp  => arg
 arg        => nil | true | false | string | number | fullvar 
@@ -28,9 +33,9 @@ preexplist => preexp preexplist | preexp
 preexp     => arg opt 
 opt        =>  and | or | <= | < | >= | > | == | ~= | [-+*/%] 
 
-conds      => cond eliflist else writeorreadlist | cond eliflist | cond
+
 eliflist   => elseif cond eliflist | () 
-cond       => [(] exp [)] then writeorreadlist | exp then writeorreadlist  
+
 laststat   => break
 laststat   => return
 laststat   => return explist1
@@ -81,7 +86,6 @@ function GCPickUpPackage:ReadStream(stream, index, size)
     index, self.m_nResult = self:ReadInt32(stream, index, size);
 
     return index;
-
 end
 
 --[Comment]
@@ -116,6 +120,21 @@ function GCActivityRewardUpgrade:ReadStream(stream, index,size)
     index,self.m_Type = self:ReadByte(stream,index,size)
     index, GCActivityRewardUpgrade.m_FlagType = self:ReadInt32(stream, index, size); 
     index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
+    
+    if GCActivityRewardUpgrade.m_FlagIcon == 2 then
+        for i = 0, self.m_count-1 do
+            index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
+            index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size);
+        end
+        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
+        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size);
+    end
+    
+    for i = 0, self.m_count-1 do
+        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
+        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size);
+    end
+    
     --printe("GCActivityRewardUpgrade:ReadStream",GCActivityRewardUpgrade.m_FlagType,GCActivityRewardUpgrade.m_FlagIcon);
     return index;
 end

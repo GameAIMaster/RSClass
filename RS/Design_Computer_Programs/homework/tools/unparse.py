@@ -149,7 +149,7 @@ class Unparser:
 
     def _read(self, tree):
         # 存储一条写包语句的类型和变量名
-        read_type = self._writeType(tree[5])
+        read_type = self._readType(tree[5])
         read_arg = self._args(tree[2])[0]
         self.fill("readType：%s readName: %s" % (read_type, read_arg))
 
@@ -174,6 +174,13 @@ class Unparser:
     def _writeType(self, tree):
         return self._name(tree[1])
 
+    def _readType(self, tree):
+        return self._name(tree[1])
+
+    # def _statlist(self, tree):
+    #     # todo how to resolve replication stat
+    #     print()
+
     def _stat(self, tree):
         """解析for语句或解析if语句"""
         genif = TagListGen()
@@ -182,7 +189,7 @@ class Unparser:
             self._if(tree)
         elif tree[1][0] == 'repetition':
             self._repetition(tree[1])
-            self._writelist(tree[3])
+            self._writeorreadlist(tree[3])
             self.leave()
             # tree[1] is 'repetition'
         # try:
@@ -206,7 +213,7 @@ class Unparser:
                 self.fill("elif ")
             self.write(self._expstr(cond))
             self.enter()
-            self._writelist(cond)
+            self._writeorreadlist(cond)
             self.leave()
         # 处理else
         try:
@@ -215,7 +222,7 @@ class Unparser:
                 if conds[3] == 'else':
                     # 打印后面的writelist
                     self.fill('else')
-                    self._writelist(conds[4])
+                    self._writeorreadlist(conds[4])
         except IndexError:
             pass
         #
