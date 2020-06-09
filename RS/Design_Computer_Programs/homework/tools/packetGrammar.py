@@ -119,20 +119,23 @@ end
 function GCActivityRewardUpgrade:ReadStream(stream, index,size)
     index,self.m_Type = self:ReadByte(stream,index,size)
     index, GCActivityRewardUpgrade.m_FlagType = self:ReadInt32(stream, index, size); 
-    index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
+    index, GCActivityRewardUpgrade.m_FlagIcon0  = self:ReadInt32(stream, index, size); 
     
     if GCActivityRewardUpgrade.m_FlagIcon == 2 then
         for i = 0, self.m_count-1 do
-            index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
-            index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size);
+            if GCActivityRewardUpgrade.m_FlagIcon == 2 then
+                index, GCActivityRewardUpgrade.m_FlagIcon10  = self:ReadInt32(stream, index, size); 
+            end
+            index, GCActivityRewardUpgrade.m_FlagIcon1  = self:ReadInt32(stream, index, size); 
+            index, GCActivityRewardUpgrade.m_FlagIcon2  = self:ReadInt32(stream, index, size);
         end
-        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
-        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size);
+        index, GCActivityRewardUpgrade.m_FlagIcon3  = self:ReadInt32(stream, index, size); 
+        index, GCActivityRewardUpgrade.m_FlagIcon4  = self:ReadInt32(stream, index, size);
     end
     
     for i = 0, self.m_count-1 do
-        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size); 
-        index, GCActivityRewardUpgrade.m_FlagIcon  = self:ReadInt32(stream, index, size);
+        index, GCActivityRewardUpgrade.m_FlagIcon5  = self:ReadInt32(stream, index, size); 
+        index, GCActivityRewardUpgrade.m_FlagIcon6  = self:ReadInt32(stream, index, size);
     end
     
     --printe("GCActivityRewardUpgrade:ReadStream",GCActivityRewardUpgrade.m_FlagType,GCActivityRewardUpgrade.m_FlagIcon);
