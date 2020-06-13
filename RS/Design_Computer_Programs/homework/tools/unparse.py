@@ -4,7 +4,7 @@ import ast
 from io import StringIO
 import os
 from Design_Computer_Programs.tools.MathLanguage import *
-
+from Design_Computer_Programs.homework.tools.packetGrammar import PACKETGRAMMAR
 # Large float and imaginary literals get turned into infinities in the AST.
 # We unparse those infinities to INFSTR.
 INFSTR = "1e" + repr(sys.float_info.max_10_exp + 1)
@@ -128,6 +128,7 @@ class Unparser:
     # currently doesn't.                                   #
     ########################################################
     def _packetType(self, tree):
+        #
         print("packetType:  %s" % tree[1])
         return tree[1]
 
@@ -213,7 +214,8 @@ class Unparser:
                 self.fill("if ")
             else:
                 self.fill("elif ")
-            self.write(self._expstr(cond))
+            exp = next(gen_cond.collect_list(cond, 'exp'))
+            self.write(self._expstr(exp))
             self.enter()
             self._statlist(cond)
             self.leave()
@@ -278,17 +280,17 @@ class Unparser:
         self.enter()
 
 
-    def _expstr(self, cond):
+    def _expstr(self, exp):
         # 返回表达式字符串
         str = ''
         gen_cond = TagListGen()
         try:
-            for preexp in gen_cond.collect_list(cond, 'preexp'):
+            for preexp in gen_cond.collect_list(exp, 'preexp'):
                 arg = next(gen_cond.collect_list(preexp, 'arg'))
                 opt = next(gen_cond.collect_list(preexp, 'opt'))
                 str += self.find_end_element(arg)+ ' '
                 str += self.find_end_element(opt)+' '
-            remindexp = next(gen_cond.collect_list(cond, 'remindexp'))
+            remindexp = next(gen_cond.collect_list(exp, 'remindexp'))
             for var in gen_cond.collect_list_deep(remindexp, 'arg'):
                 str += self.find_end_element(var[1])+' '
             return str
@@ -794,16 +796,16 @@ class Unparser:
             self.write(" as "+t.asname)
 
 def roundtrip(filename, output=sys.stdout):
-    with open(filename, "r") as pyfile:
-        source = pyfile.read()
-    tree = compile(source, filename, "exec", ast.PyCF_ONLY_AST)
-    Unparser(tree, output)
+    with open(filename, "r") as luafile:
+        source = luafile.read()
+    tree = parse('file', source, PACKETGRAMMAR)
+    Unparser(tree[0], output)
 
 
 
 def testdir(a):
     try:
-        names = [n for n in os.listdir(a) if n.endswith('.py')]
+        names = [n for n in os.listdir(a) if n.endswith('.lua')]
     except OSError:
         sys.stderr.write("Directory not readable: %s" % a)
     else:
