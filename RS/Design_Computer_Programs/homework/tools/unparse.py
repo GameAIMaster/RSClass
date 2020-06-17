@@ -4,7 +4,7 @@ import ast
 from io import StringIO
 import os
 from Design_Computer_Programs.tools.MathLanguage import *
-from Design_Computer_Programs.homework.tools.packetGrammar import PACKETGRAMMAR
+# from Design_Computer_Programs.homework.tools.packetGrammar import PACKETGRAMMAR
 # Large float and imaginary literals get turned into infinities in the AST.
 # We unparse those infinities to INFSTR.
 INFSTR = "1e" + repr(sys.float_info.max_10_exp + 1)
@@ -796,7 +796,7 @@ class Unparser:
             self.write(" as "+t.asname)
 
 def roundtrip(filename, output=sys.stdout):
-    with open(filename, "r") as luafile:
+    with open(filename, "r", encoding='UTF-8') as luafile:
         source = luafile.read()
     tree = parse('file', source, PACKETGRAMMAR)
     Unparser(tree[0], output)
@@ -812,7 +812,8 @@ def testdir(a):
         for n in names:
             fullname = os.path.join(a, n)
             if os.path.isfile(fullname):
-                output = StringIO()
+                outfullname = os.path.join(a, n.split('.')[0] + '.py')
+                output = open(outfullname, 'w+', encoding='utf-8') # StringIO()
                 print ('Testing %s' % fullname)
                 try:
                     roundtrip(fullname, output)
@@ -829,5 +830,7 @@ def main(args):
         for a in args:
             roundtrip(a)
 
-if __name__=='__main__':
-    main(sys.argv[1:])
+# if __name__=='__main__':
+    # main(sys.argv[1:])
+
+testdir('E:/Project/PublishPro/Client/StreamingAssets/TLBB/LuaScript/VoyGP/NetWork/Packets/Recruit')
