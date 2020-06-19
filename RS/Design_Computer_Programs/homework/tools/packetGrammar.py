@@ -1,5 +1,5 @@
 from Design_Computer_Programs.tools.MathLanguage import *
-from Design_Computer_Programs.homework.tools.unparse import Unparser
+# from Design_Computer_Programs.homework.tools.unparse import Unparser
 PACKETGRAMMAR = grammar("""
 packet     => _G. packetType packetName [=] BasePacket:New[(] PacketID. pakidname [)] semi?
 semi?      => [.;] | ()
@@ -126,14 +126,13 @@ function GCRetRecruitTimeInfo:ReadStream( stream, index, size )
     self:Clear();
     index, recruitListLen                             = self:ReadInt32( stream, index, size );
     for i = 1, recruitListLen do
-        local recruitData = {};
         index, recruitData[EnumRecruitProperty.recruitType]   = self:ReadInt32( stream, index, size );
         index, recruitData[EnumRecruitProperty.recruitTimes]  = self:ReadInt32( stream, index, size );
         index, recruitData[EnumRecruitProperty.free]          = self:ReadInt32( stream, index, size );
         index, recruitData[EnumRecruitProperty.times]         = self:ReadInt32( stream, index, size );
         index, recruitData[EnumRecruitProperty.totalTimes]    = self:ReadUInt32( stream, index, size );
-        table.insert( recruitList, recruitData );
     end
+    index = self:WriteCharArray(charArray, LEN, stream, index, size)
     return index;
 end
 
@@ -156,7 +155,7 @@ end
 # print(parse('stat', fortest, PACKETGRAMMAR))
 # print(parse('stat', iftest, PACKETGRAMMAR))
 
-tree = parse('file', useless_test, PACKETGRAMMAR)
-print(tree)
-
-Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'
+# tree = parse('file', useless_test, PACKETGRAMMAR)
+# print(tree)
+#
+# Unparser(tree[0]) # , 'E:\\tick\\RS\\Design_Computer_Programs\\homework\\tools'

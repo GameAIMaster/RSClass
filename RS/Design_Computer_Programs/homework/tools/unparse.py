@@ -4,7 +4,7 @@ import ast
 from io import StringIO
 import os
 from Design_Computer_Programs.tools.MathLanguage import *
-# from Design_Computer_Programs.homework.tools.packetGrammar import PACKETGRAMMAR
+from Design_Computer_Programs.homework.tools.packetGrammar import PACKETGRAMMAR
 # Large float and imaginary literals get turned into infinities in the AST.
 # We unparse those infinities to INFSTR.
 INFSTR = "1e" + repr(sys.float_info.max_10_exp + 1)
@@ -72,10 +72,13 @@ class Unparser:
          Print the source for tree to file."""
         self.f = file
         self.future_imports = []
+        self.var_list = []
         self._indent = 0
         self.dispatch(tree)
         self.f.write("")
         self.f.flush()
+        self.packetType = ''
+        self.packetName = ''
 
     def fill(self, text = ""):
         "Indent a piece of text, according to the current indentation level"
@@ -93,6 +96,19 @@ class Unparser:
     def leave(self):
         "Decrease the indentation level."
         self._indent -= 1
+
+    def collectvar(self, sysinput):
+        # Insert the collected variables into the file
+        f = sysinput
+        contents = f.readlines()
+        f.close()
+        for type, val in self.var_list:
+            contents.insert(index, value)
+        f = open("path_to_file", "w")
+        contents = "".join(contents)
+        f.write(contents)
+        f.close()
+
     @memo
     def dispatch(self, tree):
         "Dispatcher function, dispatching tree type T to method _T."
@@ -129,12 +145,28 @@ class Unparser:
     ########################################################
     def _packetType(self, tree):
         #
-        print("packetType:  %s" % tree[1])
+        # print("packetType:  %s" % tree[1])
+        self.packetType = tree[1]
         return tree[1]
 
     def _packetName(self, tree):
-        print("packetName  %s" % self._name(tree[1]))
+        # print("packetName  %s" % self._name(tree[1]))
+        self.packetName = self._name(tree[1])
+        self.writeFileHead()
         return self._name(tree[1])
+
+    def writeFileHead(self):
+        self.fill('class ' + self.packetType + self.packetName + '(Packet)')
+        self.enter()
+        self.fill('def __init__(self, person)')
+        self.enter()
+        self.fill('Packet.__init__(self, person)')
+        self.fill('${}')
+        self.leave()
+        self.fill('def getdatastream(self)')
+        self.enter()
+        self.fill('buf = \'\'')
+
 
     def _name(self, tree):
         return tree[1]
@@ -146,13 +178,36 @@ class Unparser:
         # 存储一条写包语句的类型和变量名
         write_type = self._writeType(tree[4])
         write_arg = self._args(tree[5])[0]
-        self.fill("writeType：%s writeName: %s" % (write_type, write_arg))
-
+        if write_type == 'Byte':
+            self.fill("buf += Write%s(chr(self[\'%s\']))" % (write_type, write_arg))
+        elif write_type == 'CharArray':
+            args = self._args(tree[5])
+            write_len = args[1]
+            if write_len.isdigit():
+                self.fill("buf += Write%s(self[\'%s\'], %s, True)" % (write_type, write_arg, write_len))
+            else:
+                self.fill("buf += Write%s(self[\'%s\'], self[\'%s\'], True)" % (write_type, write_arg, write_len))
+        else:
+            self.fill("buf += Write%s(self[\'%s\'])" % (write_type, write_arg))
     def _read(self, tree):
         # 存储一条写包语句的类型和变量名
         read_type = self._readType(tree[5])
         read_arg = self._args(tree[2])[0]
-        self.fill("readType：%s readName: %s" % (read_type, read_arg))
+        if read_type == 'Byte':
+            self.fill("(self[\'%s\'], buf) = ReadByte(buf)" % (read_arg))
+            self.fill("self[\'%s\'] = ord(self[\'%s\'])" % (read_arg))
+        elif read_type == 'CharArray':
+            read_len = self._args(tree[2])[1]
+            if read_len.isdigit():
+                self.fill(
+                    "(self[\'%s\'], buf) = ReadCharArray(buf, %s, True)" % (read_arg, read_len))
+            else:
+                self.fill(
+                    "(self[\'%s\'], buf) = ReadCharArray(buf, self[\'%s\'], True)" % (read_arg, read_len))
+        elif read_type == 'UInt32':
+            self.fill("(self[\'%s\'], buf) = ReadUint(buf)" % (read_type, read_arg))
+        else:
+            self.fill("(self[\'%s\'], buf) = Read%s(buf)" % (read_type, read_arg))
 
     def _writeorreadlist(self, tree):
         gen_cond = TagListGen()
@@ -168,8 +223,8 @@ class Unparser:
         # 提取参数变量
         args = []
         gen = TagListGen()
-        for arg in gen.collect_list(tree,u'var'):
-            args.append(self._name(arg[1]))
+        for arg in gen.collect_list(tree, u'arg'):
+            args.append(self.find_end_element(arg))
         return args
 
     def _writeType(self, tree):
@@ -795,11 +850,17 @@ class Unparser:
         if t.asname:
             self.write(" as "+t.asname)
 
-def roundtrip(filename, output=sys.stdout):
+def roundtrip(filename, outfullname=''):
     with open(filename, "r", encoding='UTF-8') as luafile:
         source = luafile.read()
+    if outfullname == '':
+        output = sys.stdout
+    else:
+        output = open(outfullname, 'w+', encoding='utf-8')  # StringIO()
     tree = parse('file', source, PACKETGRAMMAR)
-    Unparser(tree[0], output)
+    packet = Unparser(tree[0], output)
+    # collect var write to packet
+    packet.collectvar()
 
 
 
@@ -813,12 +874,11 @@ def testdir(a):
             fullname = os.path.join(a, n)
             if os.path.isfile(fullname):
                 outfullname = os.path.join(a, n.split('.')[0] + '.py')
-                output = open(outfullname, 'w+', encoding='utf-8') # StringIO()
-                print ('Testing %s' % fullname)
+                print('Testing %s' % fullname)
                 try:
-                    roundtrip(fullname, output)
+                    roundtrip(fullname, outfullname)
                 except Exception as e:
-                    print ('  Failed to compile, exception is %s' % repr(e))
+                    print('  Failed to compile, exception is %s' % repr(e))
             elif os.path.isdir(fullname):
                 testdir(fullname)
 
