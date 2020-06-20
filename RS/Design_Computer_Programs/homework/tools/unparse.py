@@ -97,18 +97,6 @@ class Unparser:
         "Decrease the indentation level."
         self._indent -= 1
 
-    def collectvar(self, sysinput):
-        # Insert the collected variables into the file
-        f = sysinput
-        contents = f.readlines()
-        f.close()
-        for type, val in self.var_list:
-            contents.insert(index, value)
-        f = open("path_to_file", "w")
-        contents = "".join(contents)
-        f.write(contents)
-        f.close()
-
     @memo
     def dispatch(self, tree):
         "Dispatcher function, dispatching tree type T to method _T."
@@ -178,32 +166,27 @@ class Unparser:
         # 存储一条写包语句的类型和变量名
         write_type = self._writeType(tree[4])
         write_arg = self._args(tree[5])[0]
+        self.var_list.append((write_type, write_arg))
         if write_type == 'Byte':
             self.fill("buf += Write%s(chr(self[\'%s\']))" % (write_type, write_arg))
         elif write_type == 'CharArray':
             args = self._args(tree[5])
             write_len = args[1]
-            if write_len.isdigit():
-                self.fill("buf += Write%s(self[\'%s\'], %s, True)" % (write_type, write_arg, write_len))
-            else:
-                self.fill("buf += Write%s(self[\'%s\'], self[\'%s\'], True)" % (write_type, write_arg, write_len))
+            self.fill("buf += Write%s(self[\'%s\'], %s, True)" % (write_type, write_arg, self.pack_arg(write_len)))
         else:
             self.fill("buf += Write%s(self[\'%s\'])" % (write_type, write_arg))
     def _read(self, tree):
         # 存储一条写包语句的类型和变量名
         read_type = self._readType(tree[5])
         read_arg = self._args(tree[2])[0]
+        self.var_list.append((read_type, read_arg))
         if read_type == 'Byte':
             self.fill("(self[\'%s\'], buf) = ReadByte(buf)" % (read_arg))
             self.fill("self[\'%s\'] = ord(self[\'%s\'])" % (read_arg))
         elif read_type == 'CharArray':
             read_len = self._args(tree[2])[1]
-            if read_len.isdigit():
-                self.fill(
-                    "(self[\'%s\'], buf) = ReadCharArray(buf, %s, True)" % (read_arg, read_len))
-            else:
-                self.fill(
-                    "(self[\'%s\'], buf) = ReadCharArray(buf, self[\'%s\'], True)" % (read_arg, read_len))
+            self.fill(
+                "(self[\'%s\'], buf) = ReadCharArray(buf, %s, True)" % (read_arg, self.pack_arg(read_len)))
         elif read_type == 'UInt32':
             self.fill("(self[\'%s\'], buf) = ReadUint(buf)" % (read_type, read_arg))
         else:
@@ -281,45 +264,13 @@ class Unparser:
                 if conds[3] == 'else':
                     # 打印后面的writelist
                     self.fill('else')
+                    self.enter()
                     self._statlist(conds[4])
         except IndexError:
             pass
-        #
-        # for cond in gen_cond.collect_list(tree, 'cond'):
-        #     # 打印里面所有的var，opt，and\or
-        #     gen_preexp = TagListGen()
-        #     for preexp in gen_preexp.collect_list(cond, 'preexp'):
-        #         arg = next(gen_preexp.collect_list(preexp, 'arg'))
-        #         opt = next(gen_preexp.collect_list(preexp, 'opt'))
-        #         print(self.find_end_element(arg), self.find_end_element(opt))
-        #     remindexp = next(gen_cond.collect_list(cond, 'remindexp'))
-        #     for var in gen_preexp.collect_list_deep(remindexp, 'var'):
-        #         print(self.find_end_element(var[1]))
-
-        # 从var
-
-        # self.dispatch(tree.test)
-        # self.enter()
-        # self.dispatch(tree.body)
-        # self.leave()
-        # # collapse nested ifs into equivalent elifs.
-        # while (t.orelse and len(t.orelse) == 1 and
-        #        isinstance(t.orelse[0], ast.If)):
-        #     t = t.orelse[0]
-        #     self.fill("elif ")
-        #     self.dispatch(t.test)
-        #     self.enter()
-        #     self.dispatch(t.body)
-        #     self.leave()
-        # # final else
-        # if tree.orelse:
-        #     self.fill("else")
-        #     self.enter()
-        #     self.dispatch(t.orelse)
-        #     self.leave()
 
     def _repetition(self, tree):
-        #todo
+        """parse for content"""
         self.fill("for ")
         gen_for = TagListGen()
         var = next(gen_for.collect_list(tree, 'name'))# var
@@ -334,6 +285,14 @@ class Unparser:
                 self.write(')')
         self.enter()
 
+    def pack_arg(self, str):
+        "if not number return self['str'] else return self"
+        if str.isdigit():
+            return str
+        else:
+            res = ("self[\'%s\']" % str)
+            self.var_list.append(("ArgType", str))
+            return res
 
     def _expstr(self, exp):
         # 返回表达式字符串
@@ -343,11 +302,13 @@ class Unparser:
             for preexp in gen_cond.collect_list(exp, 'preexp'):
                 arg = next(gen_cond.collect_list(preexp, 'arg'))
                 opt = next(gen_cond.collect_list(preexp, 'opt'))
-                str += self.find_end_element(arg)+ ' '
+                arg_end = self.find_end_element(arg)
+                str += (self.pack_arg(arg_end) + ' ')
                 str += self.find_end_element(opt)+' '
             remindexp = next(gen_cond.collect_list(exp, 'remindexp'))
             for var in gen_cond.collect_list_deep(remindexp, 'arg'):
-                str += self.find_end_element(var[1])+' '
+                arg_end = self.find_end_element(var[1])
+                str += self.pack_arg(arg_end) + ' '
             return str
         except StopIteration:
             pass
@@ -860,8 +821,15 @@ def roundtrip(filename, outfullname=''):
     tree = parse('file', source, PACKETGRAMMAR)
     packet = Unparser(tree[0], output)
     # collect var write to packet
-    packet.collectvar()
+    collectvar(packet, outfullname)
 
+from pandas import Series,DataFrame
+import pandas as pd
+def collectvar(packet,outfullname ):
+    # Insert the collected variables into the csv
+    var_set = set(val for type, val in packet.var_list)
+    df = DataFrame(columns=var_set)
+    df.to_csv(outfullname+".csv", index=False, sep=',')
 
 
 def testdir(a):
