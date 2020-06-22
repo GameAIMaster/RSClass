@@ -140,7 +140,10 @@ class Unparser:
     def _packetName(self, tree):
         # print("packetName  %s" % self._name(tree[1]))
         self.packetName = self._name(tree[1])
-        self.writeFileHead()
+        if self.packetType == 'CG':
+            self.writeFileHead()
+        elif self.packetType == 'GC':
+            self.readFileHead()
         return self._name(tree[1])
 
     def writeFileHead(self):
@@ -149,12 +152,24 @@ class Unparser:
         self.fill('def __init__(self, person)')
         self.enter()
         self.fill('Packet.__init__(self, person)')
-        self.fill('${}')
         self.leave()
         self.fill('def getdatastream(self)')
         self.enter()
         self.fill('buf = \'\'')
 
+    def readFileHead(self):
+        self.fill('class ' + self.packetType + self.packetName + '(Packet)')
+        self.enter()
+        self.fill('def __init__(self, person)')
+        self.enter()
+        self.fill('Packet.__init__(self, person)')
+        self.leave()
+        self.fill('def handle(self)')
+        self.enter()
+        self.fill('pass')
+        self.leave()
+        self.fill('def filldatafromstream(self, buf)')
+        self.enter()
 
     def _name(self, tree):
         return tree[1]
@@ -178,19 +193,19 @@ class Unparser:
     def _read(self, tree):
         # 存储一条写包语句的类型和变量名
         read_type = self._readType(tree[5])
-        read_arg = self._args(tree[2])[0]
+        read_arg = self.find_end_element(tree[2])
         self.var_list.append((read_type, read_arg))
         if read_type == 'Byte':
             self.fill("(self[\'%s\'], buf) = ReadByte(buf)" % (read_arg))
-            self.fill("self[\'%s\'] = ord(self[\'%s\'])" % (read_arg))
+            self.fill("self[\'%s\'] = ord(self[\'%s\'])" % (read_arg, read_arg))
         elif read_type == 'CharArray':
             read_len = self._args(tree[2])[1]
             self.fill(
                 "(self[\'%s\'], buf) = ReadCharArray(buf, %s, True)" % (read_arg, self.pack_arg(read_len)))
         elif read_type == 'UInt32':
-            self.fill("(self[\'%s\'], buf) = ReadUint(buf)" % (read_type, read_arg))
+            self.fill("(self[\'%s\'], buf) = ReadUint(buf)" % (read_arg, read_type))
         else:
-            self.fill("(self[\'%s\'], buf) = Read%s(buf)" % (read_type, read_arg))
+            self.fill("(self[\'%s\'], buf) = Read%s(buf)" % (read_arg, read_type))
 
     def _writeorreadlist(self, tree):
         gen_cond = TagListGen()

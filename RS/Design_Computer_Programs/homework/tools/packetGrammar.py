@@ -112,42 +112,88 @@ useless_test = """
 --- DateTime: 2019/5/20 5:20
 ---
 --- 招募界面 基本信息
-_G.GCRetRecruitTimeInfo = BasePacket:New( PacketID.PACKET_GC_RET_RECRUIT_TIME_INFO );
+_G.GCRetRecruitInfo = BasePacket:New( PacketID.PACKET_GC_RET_RECRUIT_INFO );
 
-local recruitListLen = 0;
-local recruitList = nil;
+GCRetRecruitInfo.RewardData = nil;
 
+local m_nRecruitType    = 0;
+local m_nResult         = 0;    -- 1：成功；2：失败
+local m_nRewardLen      = 0;
+local m_nRewardList     = nil
+local openRecruitAnimPanel = false;
 
-function GCRetRecruitTimeInfo:GetSize()
+function GCRetRecruitInfo:GetSize()
     return 0;
 end
 
-function GCRetRecruitTimeInfo:ReadStream( stream, index, size )
-    self:Clear();
-    index, recruitListLen                             = self:ReadInt32( stream, index, size );
-    for i = 1, recruitListLen do
-        index, recruitData[EnumRecruitProperty.recruitType]   = self:ReadInt32( stream, index, size );
-        index, recruitData[EnumRecruitProperty.recruitTimes]  = self:ReadInt32( stream, index, size );
-        index, recruitData[EnumRecruitProperty.free]          = self:ReadInt32( stream, index, size );
-        index, recruitData[EnumRecruitProperty.times]         = self:ReadInt32( stream, index, size );
-        index, recruitData[EnumRecruitProperty.totalTimes]    = self:ReadUInt32( stream, index, size );
+function GCRetRecruitInfo:ReadStream( stream, index, size )
+
+    index, m_nRecruitType                   = self:ReadInt32( stream, index, size );
+    index, m_nResult                        = self:ReadInt32( stream, index, size );
+    index, m_nRewardLen                     = self:ReadInt32( stream, index, size );
+
+    for i = 1, m_nRewardLen do
+
+        index, rewardData.m_nID = self:ReadInt32( stream, index, size );
+        index, rewardData.m_nType = self:ReadInt32( stream, index, size );
+        index, rewardData.m_nCount = self:ReadInt32( stream, index, size );
+        if( rewardData.m_nType == 0 )then
+            index, decomposeItemData.m_nID = self:ReadInt32( stream, index, size );
+        else
+
+            index, rewardData.m_nDecomposeItemCount = self:ReadInt32( stream, index, size );
+
+            for i = 1, rewardData.m_nDecomposeItemCount do
+
+                index, decomposeItemData.m_nID = self:ReadInt32( stream, index, size );
+                index, decomposeItemData.m_nCount = self:ReadInt32( stream, index, size );
+
+            end
+        end
     end
-    index = self:WriteCharArray(charArray, LEN, stream, index, size)
     return index;
 end
 
-function GCRetRecruitTimeInfo:Execute()
-    for i, data in pairs( recruitList ) do
-        RecruitModule:SetRecruitInfo( data )
+function GCRetRecruitInfo:Execute()
+    if( m_nResult == 2 )then
+        if(NavigatorRecruitCompassUI:IsOpen())then
+            NavigatorRecruitCompassUI:OnClose()
+        end
+        if NavigatorRecruitMainUI:IsOpen() then
+            NavigatorRecruitMainUI:SetCutBlackActive( false );
+        end
+        NavigatorRecruitMainUI:SetNoticeActive( true );
+        NavigatorRecruitMainUI:ActiveRecruitButton(false);
+        EventSender.SendEvent( LuaEvent.ShowPublicTip, lang( 219218 ) );
+        return;
     end
-    EventSender.SendEvent( DataEvent.RefreshAdvanceRecruitFreeList );
-    EventSender.SendEvent( DataEvent.RefreshCommonRecruitFreeList );
-    EventSender.SendEvent( DataEvent.GC_RET_RECRUIT_TIME_INFO );
+
+    GCRetRecruitInfo.RewardData = {};
+    GCRetRecruitInfo.RewardData.recruitType = m_nRecruitType;
+    GCRetRecruitInfo.RewardData.result = m_nResult;
+    GCRetRecruitInfo.RewardData.rewardLen = m_nRewardLen;
+    GCRetRecruitInfo.RewardData.rewardList = m_nRewardList;
+    GCRetRecruitInfo.RewardData.isShowShanbai = false;
+    -- 普通招募：直接弹结果  高级招募：如果结果没有航海士，直接弹结果。否则走罗盘动画
+    if( m_nRecruitType == 1 or not openRecruitAnimPanel)then
+    --if(  not openRecruitAnimPanel )then
+        --普通招募
+        NavigatorRecruitCompassUI:OpenSelf(true);
+    else
+        --其他招募
+        Invoke:DelayCall( function()
+            RecruitAnimationCoverPanelUI:OpenPanel();
+            --RecruitAnimationPanelUI:OpenPanel();
+        end, 0.6 );
+    end
+    EventSender.SendEvent(LuaEvent.RefreshNavigatorPanel)
 end
 
-function GCRetRecruitTimeInfo:Clear()
-    recruitListLen  = 0;
-    recruitList     = {};
+function GCRetRecruitInfo:Clear()
+    m_nRecruitType                   = 0;
+    m_nResult                         = 0;
+    m_nRewardLen                     = 0;
+    m_nRewardList                    = nil;
 end
 """
 # print(parse('packet', packet, PACKETGRAMMAR))
