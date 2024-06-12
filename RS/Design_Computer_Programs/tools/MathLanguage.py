@@ -10,7 +10,6 @@ Funcall => Var [(] Exps [)]
 Exps    => Exp [,] Exps | Exp
 Var     => [a-zA-Z_]\w*
 Num     => [-+]?[0-9]+([.][0-9]*)?
-缺少能理解这种语法的东西
 """
 # 希望在计算机中存储方式
 # G = {'Exp': (['Term', '[+-]', 'Exp'], ['Term'] ),
@@ -41,7 +40,7 @@ Var     => [a-zA-Z_]\w*
 Num     => [-+]?[0-9]+([.][0-9]*)?""")
 
 
-# >>> parse('Exp', 'a * x', G)
+# parse('Exp', '3 + 4', G)
 # (['Exp', ['Term',['Factor', ['Var', 'a']],
 #  '*',
 #  ['Term',['Factor', ['Var', 'x']]]]],'')
@@ -82,7 +81,7 @@ def parse(start_symbol, text, grammar):
     return parse_atom(start_symbol, text)
 Fail = (None, None)
 
-# print(parse('Exp', 'wq * x + 3', G))
+# print(parse('Exp', '2 + 3', G))
 
 # print(re.match("\\s*(%s)" % '-?\d[0-9]*', ''' 0, self.m_count-1 do
 #         index = self:WriteByte(self.m_ItemIndex[i], stream, index, size);

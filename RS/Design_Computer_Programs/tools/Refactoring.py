@@ -23,7 +23,7 @@ def n_ary(f):
 def seq(x,y): return ('seq', x, y)
 
 # 用来查找语法中的错误，
-def verify(G):
+def verify(G: object) -> object:
     lhstokens = set(G) - set([' '])
     rhstokens = set(t for alts in G.values() for alt in alts for t in alt)
     def show(title, tokens): print (title,'=',' '.join(sorted(tokens)))

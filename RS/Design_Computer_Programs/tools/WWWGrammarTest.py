@@ -43,4 +43,4 @@ xalpha => alpha | digit | safe | extra | escape
 
 url = 'http://www.google.com/'
 print(parse('url', url, URL))
-# verify(URL)
+verify(URL)
