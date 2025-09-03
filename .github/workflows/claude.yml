@@ -33,16 +33,15 @@ jobs:
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
+        env:
+          ANTHROPIC_BASE_URL: "https://gaccode.com/claudecode"
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           
           # This is an optional setting that allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
-          env:
-          # 自定义 Anthropic API 基础 URL (可选)
-          # 例如：如果使用代理或自托管的 Claude API 端点
-            ANTHROPIC_BASE_URL:"https://gaccode.com/claudecode"
+        
 
           # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
           # prompt: 'Update the pull request description to include a summary of changes.'
